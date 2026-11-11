@@ -1,0 +1,834 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><meta name="theme-color" content="#102326"/><title>CHORUSWILD — Echoes of the Five</title><style>
+:root{--bg:#0c171e;--panel:#10242a;--panel2:#182f34;--stroke:#315056;--text:#f3f3e8;--muted:#a2b3b0;--mint:#c6f08e;--gold:#ffdf98;--navy:#14272d;--shadow:0 20px 60px #06101680}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,'Trebuchet MS',system-ui,-apple-system,sans-serif;min-height:100vh;overflow-x:hidden}button,input,select{font:inherit}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.42}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #c6f08e;outline-offset:3px}a{color:inherit;text-decoration:none}h1,h2,h3,p{margin-top:0}.ambient{position:fixed;width:650px;height:650px;pointer-events:none;filter:blur(95px);opacity:.16;border-radius:50%;z-index:-1}.a1{top:-300px;left:-160px;background:#9cce78}.a2{bottom:-280px;right:-180px;background:#577fe7}#coins,#prisms{font-variant-numeric:tabular-nums}.topbar{height:84px;border-bottom:1px solid #294045;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(20px,4vw,60px);gap:20px;background:#0c191ed9;backdrop-filter:blur(20px);position:sticky;top:0;z-index:25}.logo{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:.035em;font-size:20px;line-height:1}.logo .sigil{font-size:44px;font-weight:400;color:var(--mint)}.logo-accent{color:var(--mint)}.logo small{display:block;font-size:9px;font-weight:700;letter-spacing:.3em;margin-top:7px;color:#96aaa5}.top-right{display:flex;align-items:center;gap:20px}.wallet{display:flex;gap:14px;background:#1b3034;border:1px solid #355057;padding:11px 14px;border-radius:40px;white-space:nowrap;color:#fbd991;font-size:14px}.wallet span:last-child{color:#c3a8ff}.wallet strong{color:var(--text)}.button{border:1px solid #4d6970;border-radius:12px;padding:12px 18px;background:#1b3438;color:var(--text);font-weight:800;font-size:13px;transition:transform .2s,background .2s,border .2s;white-space:nowrap}.button:not(:disabled):hover{transform:translateY(-2px);background:#29454a}.button-primary{background:var(--mint);border:1px solid #e4ffb3;color:#21372d;box-shadow:0 6px 21px #b2e68320}.button-primary:not(:disabled):hover{background:#e5ffa8}.button-ghost{background:#233a40}.app{display:grid;grid-template-columns:275px minmax(0,1fr);gap:40px;max-width:1560px;margin:0 auto;padding:33px clamp(20px,4vw,60px) 70px}.side-panel{min-width:0}.overline{font-size:10px;font-weight:900;letter-spacing:.21em;color:var(--mint);text-transform:uppercase;margin-bottom:14px}h1{font-size:clamp(34px,3.1vw,51px);font-weight:850;line-height:1.08;letter-spacing:-.06em;margin-bottom:13px}h1 em{font-family:Georgia,serif;color:var(--mint);font-weight:400;letter-spacing:-.04em}h2{letter-spacing:-.035em}h3{font-size:20px;letter-spacing:-.035em}.intro{color:var(--muted);line-height:1.6;font-size:13px;margin-bottom:30px}.island-list{display:flex;flex-direction:column;gap:9px;margin-bottom:27px}.island-entry{display:flex;align-items:center;gap:10px;width:100%;background:#14282c;border:1px solid #2e4547;border-radius:13px;color:#d2e1d5;text-align:left;padding:11px 13px}.island-entry strong{display:block;font-size:13px}.island-entry small{display:block;color:var(--muted);font-size:10px;margin-top:4px}.island-entry.active{background:#223a36;border-color:#7da876;box-shadow:inset 3px 0 var(--mint)}.island-token{height:33px;width:33px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#7db791,#203c45);font-size:17px;flex-shrink:0}.island-entry:nth-child(2) .island-token{background:linear-gradient(135deg,#e0a065,#59364e)}.island-entry:nth-child(3) .island-token{background:linear-gradient(135deg,#98acd8,#45416c)}.nav{border-top:1px solid #31474b;padding-top:18px;display:flex;flex-direction:column;gap:4px}.navitem{border:0;border-radius:12px;padding:13px 14px;color:#afc2c0;background:transparent;text-align:left;font-weight:750;font-size:14px;display:flex;align-items:center;gap:14px}.navitem span{font-size:20px;width:22px;text-align:center;font-weight:400}.navitem.active{color:var(--mint);background:#233a36}.navitem:hover{background:#23373a}.tip-panel{display:flex;gap:12px;margin-top:30px;border:1px solid #496951;background:linear-gradient(135deg,#294335,#1c3034);border-radius:14px;padding:14px}.tip-icon{font-size:18px;color:#ffe6a0}.tip-panel strong{font-size:13px}.tip-panel p{font-size:11px;line-height:1.55;color:#c0ccc0;margin:7px 0 0}.content{min-width:0}.view{display:none;animation:viewin .28s ease}.view.active{display:block}@keyframes viewin{from{opacity:.1;transform:translateY(9px)}to{opacity:1;transform:translateY(0)}}.scene{height:305px;border:1px solid #516b67;border-radius:24px;overflow:hidden;position:relative;background:linear-gradient(180deg,#0d2b38,#28605e 68%,#456851);box-shadow:var(--shadow)}.stars{position:absolute;inset:0;background-image:radial-gradient(#fff9b7 1.4px,transparent 2px),radial-gradient(#e3e1df 1px,transparent 2px),radial-gradient(#fff5b4 1px,transparent 2px);background-size:117px 101px,89px 143px,173px 121px;background-position:30px 21px,80px 77px,5px 100px;opacity:.58;animation:twinkle 5s ease-in-out infinite alternate}@keyframes twinkle{from{opacity:.35}to{opacity:.72}}.moon{width:105px;height:105px;position:absolute;right:17%;top:35px;border-radius:50%;background:radial-gradient(circle at 38% 33%,#fff6c5,#ecdca1 68%,#baa36f);box-shadow:0 0 70px #efeeaf70}.scene[data-island=cove] .moon{background:radial-gradient(circle at 33% 31%,#ffd6b0,#e98d65 67%,#b65e55);box-shadow:0 0 70px #fda66a85}.scene[data-island=aether] .moon{background:radial-gradient(circle at 38% 33%,#d7e9ff,#a8b6ff 68%,#767dc0);box-shadow:0 0 70px #8d9ef780}.hills{position:absolute;bottom:-20px;left:-10%;width:120%;height:155px;border-radius:50% 50% 0 0 / 85% 85% 0 0}.hills.far{background:#28585b;bottom:-38px;transform:rotate(-6deg);filter:brightness(.9)}.hills.near{background:#183f48;bottom:-99px;transform:rotate(8deg);height:210px}.scene[data-island=cove] .hills.far{background:#67404b}.scene[data-island=cove] .hills.near{background:#3c2a3c}.scene[data-island=aether] .hills.far{background:#3b4382}.scene[data-island=aether] .hills.near{background:#242957}.scene-content{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;padding:33px 34px;z-index:2}.scene-heading .overline{color:#f6fae4;text-shadow:0 2px 5px #0006;font-size:10px}.scene h2{font-family:Georgia,'Times New Roman',serif;font-size:clamp(30px,3vw,46px);font-weight:400;margin:0 0 7px;text-shadow:0 3px 10px #08171b99}.scene p{color:#f0f0dd;font-size:12px;opacity:.9}.song-controls{display:flex;align-items:center;justify-content:space-between;gap:15px;color:#eff9d4;text-shadow:0 2px 6px #092126}.wave{font-size:17px;letter-spacing:3px;opacity:.75}.playing .wave{animation:beat .7s ease-in-out infinite alternate}@keyframes beat{from{transform:scaleY(.6);opacity:.5}to{transform:scaleY(1.23);opacity:1}}#nowPlaying{font-size:11px;text-align:right}.stage-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:flex-end}.section-header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:28px 0 18px;flex-wrap:wrap}.section-header h3{margin:0 0 7px}.section-header p{font-size:12px;color:var(--muted);margin:0}.soft{font-size:12px;color:#98b4ad;font-weight:500;margin-left:7px}.stage{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:15px}.stage-slot{border:1px dashed #4c6263;border-radius:16px;min-height:166px;background:#14272a;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:10px;position:relative;overflow:hidden;gap:3px}.stage-slot.filled{border-style:solid;border-color:#496b67;background:radial-gradient(circle at 50% 35%,#324f4a,#182c2f 82%);box-shadow:inset 0 2px #dffbd017}.stage-slot .monster-art{width:100%;height:105px;max-width:125px}.stage-slot strong{font-size:12px;line-height:1.2}.stage-slot small{font-size:10px;color:#b6cbbe}.stage-slot .remove{position:absolute;right:7px;top:7px;font-size:11px;width:23px;height:23px;background:#17292be6;color:#d8ede0;border:1px solid #63827f;border-radius:50%;z-index:1}.stage-slot .empty-icon{font-size:27px;color:#69857b}.stage-slot.empty{color:#8ca69c;font-size:11px}.stage-slot.empty:hover{border-color:var(--mint);background:#193632}.song-on .creature-bob{animation:bop .62s cubic-bezier(.2,.2,.3,1) infinite alternate}.song-on:nth-child(2n) .creature-bob{animation-duration:.73s}.song-on:nth-child(3n) .creature-bob{animation-duration:.54s}@keyframes bop{from{transform:translateY(1px) rotate(-1deg);transform-origin:80px 120px}to{transform:translateY(-5px) rotate(2deg);transform-origin:80px 120px}}.epic-halo{transform-origin:80px 80px;animation:spin 28s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}.lower-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-top:23px}.stat{padding:17px;border:1px solid #324950;border-radius:14px;background:#13272b}.stat span{display:block;color:#819d9b;font-size:10px;letter-spacing:.15em;font-weight:800;margin-bottom:6px}.stat strong{font-size:20px;letter-spacing:-.035em}.view-head{padding:16px 0 20px}.view-head h2{font-family:Georgia,serif;font-size:clamp(30px,3vw,43px);font-weight:400;margin-bottom:11px}.view-head p{font-size:13px;color:var(--muted);line-height:1.55;max-width:640px}.brew-layout{display:grid;grid-template-columns:minmax(0,1fr) 285px;gap:20px}.brew-workspace,.guide{background:linear-gradient(145deg,#1b3438,#11282c);border:1px solid #3a5557;border-radius:18px;padding:22px}.parent-row{display:flex;align-items:center;gap:12px}.parent-pick{height:194px;min-width:0;flex:1;border:1px dashed #6d837e;border-radius:15px;background:#1b3337;color:#c1d5cb;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:13px;font-size:12px;font-weight:700}.parent-pick .monster-art{width:115px;height:120px}.parent-pick strong{font-size:14px}.parent-pick small{font-size:11px;color:#a7c2b6}.parent-pick .plus{font-size:27px;color:var(--mint)}.parent-pick:hover{border-color:var(--mint);background:#234542}.cross{font-family:Georgia,serif;font-size:23px;color:var(--gold)}.prediction{background:#142b2f;color:#bad1c8;border:1px solid #385458;border-radius:12px;padding:15px;line-height:1.6;margin:17px 0;font-size:12px;min-height:55px}.prediction strong{color:#e5f3c3}.breed-actions{display:flex;align-items:center;justify-content:space-between;gap:13px;flex-wrap:wrap}.prism-checkbox{font-size:12px;display:flex;align-items:center;gap:9px;cursor:pointer;color:#dbc7ff}.prism-checkbox input{accent-color:#c4a1ff;width:17px;height:17px}.prism-checkbox small{display:block;color:#9aabb1;margin-top:3px}.outcome{border:1px solid #8bb79b;border-radius:14px;padding:17px;margin-top:18px;background:#234036}.outcome .result-portrait{width:120px;margin:0 auto}.outcome strong{display:block;font-size:20px;text-align:center}.outcome .result-desc{text-align:center;font-size:12px;color:#d8ebdf}.outcome .button{display:block;margin:13px auto 0}.outcome .rarity-pill{text-align:center;display:block;font-weight:800;font-size:11px;margin:4px}.guide h3{margin:0 0 12px}.element-legend{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:22px}.element-chip{display:inline-flex;align-items:center;gap:4px;border:1px solid #63736a66;border-radius:30px;padding:5px 8px;font-size:10px;background:#ffffff09;color:#d6efdd;white-space:nowrap}.element-chip b{font-size:14px}.rule{border-top:1px solid #3d5755;padding:13px 0 0;margin-top:12px}.rule b{font-size:13px;color:#e4efd9}.rule p{font-size:11px;line-height:1.55;color:#b1c7c0;margin:6px 0 0}.fineprint{font-size:11px;line-height:1.6;color:#93aaa6;margin:23px 0 0}.monster-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}.monster-card{border:1px solid #3b5558;background:radial-gradient(circle at 50% 30%,#2b4746,#14282c 78%);border-radius:17px;padding:15px;text-align:center;position:relative}.monster-card .monster-art{width:100%;max-width:185px;height:160px;display:block;margin:auto}.monster-card strong{display:block;font-size:16px}.monster-card p{font-size:11px;line-height:1.5;color:#b0c5bb;min-height:32px}.monster-card .button{width:100%;margin-top:5px}.card-tags{display:flex;justify-content:center;gap:4px;margin:8px 0}.filter-row{display:flex;gap:10px;margin:6px 0 18px;flex-wrap:wrap}.filter-row input,.filter-row select{background:#1b3337;border:1px solid #446064;color:#e6f5eb;border-radius:10px;padding:11px;font-size:12px;outline:none}.filter-row input{min-width:200px;flex:1}.filter-row select{min-width:130px}.book-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.book-item{text-align:left;border:1px solid #354f53;background:#142b2e;border-radius:15px;padding:13px;color:#e9f0e8;display:flex;flex-direction:column;min-width:0;transition:.2s}.book-item:hover{border-color:#afc2ad;background:#1e3539;transform:translateY(-1px)}.book-item.undiscovered .monster-art{filter:brightness(.04) grayscale(1);opacity:.6}.book-item .monster-art{height:124px;width:100%}.book-item .book-name{font-size:13px;font-weight:850;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.book-item .book-sub{font-size:10px;color:#9eb7b1;margin-top:5px}.book-item .rarity-tag{font-size:9px;display:inline-block;margin-top:8px;text-transform:uppercase;letter-spacing:.12em;font-weight:900}.book-item.undiscovered .book-name{color:#849a9a}.modal[hidden],.outcome[hidden]{display:none}.modal{position:fixed;inset:0;z-index:50;display:grid;place-items:center;padding:20px}.modal-backdrop{position:absolute;inset:0;background:#071116e0;backdrop-filter:blur(8px)}.modal-card{position:relative;z-index:2;width:min(600px,100%);max-height:min(90vh,840px);overflow:auto;background:#173038;border:1px solid #608073;border-radius:21px;padding:26px;box-shadow:0 25px 80px #000b}.modal-close{position:absolute;right:19px;top:19px;border:1px solid #496364;border-radius:50%;color:#d6ebd8;background:#244048;width:32px;height:32px}.modal-card h2{font-family:Georgia,serif;font-size:29px;font-weight:400;margin:0 40px 7px 0}.modal-card>p{color:#b2c7c1;font-size:12px;line-height:1.6;max-width:430px}.picker-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-top:17px}.picker-item{display:flex;flex-direction:column;align-items:center;background:#1b393d;border:1px solid #4b6364;color:#e6f2e8;border-radius:11px;padding:8px;text-align:center;font-size:11px;min-width:0}.picker-item:hover{border-color:var(--mint);background:#295047}.picker-item .monster-art{width:100%;height:93px}.picker-item strong{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.picker-item small{font-size:9px;color:#acc6c1;margin:4px 0 2px}.detail-art{width:180px;height:175px;margin:0 auto;display:block}.detail-card{text-align:center}.detail-card p{font-size:12px;line-height:1.6;color:#c6dcd1}.detail-card .formula{border:1px solid #43615e;background:#20383b;border-radius:12px;padding:12px;font-size:12px;line-height:1.5;margin:13px 0}.formula strong{display:block;color:var(--mint);margin-bottom:5px}.detail-actions{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap}.rarity-ribbon{display:flex;justify-content:center;gap:5px;margin:6px 0}.rarity-ribbon span{display:inline-flex;padding:5px 10px;border-radius:30px;border:1px solid #45626b;font-size:10px;font-weight:800}.rarity-ribbon span.owned{color:#1c2b2b;background:#cde7aa;border-color:#cde7aa}.empty-message{padding:30px;color:#9fbbb5;grid-column:1/-1;border:1px dashed #466266;border-radius:12px;text-align:center}.toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,70px);opacity:0;pointer-events:none;background:#d3f7ab;color:#1d362e;border-radius:14px;padding:12px 20px;font-size:13px;font-weight:800;z-index:80;box-shadow:0 8px 35px #0008;transition:.3s;max-width:90vw;text-align:center}.toast.visible{opacity:1;transform:translate(-50%,0)}footer{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap;font-size:10px;padding:20px clamp(20px,4vw,60px);color:#668c89;border-top:1px solid #29474c}@media(max-width:1160px){.app{gap:22px;grid-template-columns:235px minmax(0,1fr)}.stage{grid-template-columns:repeat(4,minmax(0,1fr))}.brew-layout{grid-template-columns:1fr}.guide{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 18px}.guide>.overline,.guide>h3,.guide>.element-legend,.guide>.fineprint{grid-column:1/-1}.rule{margin:0}.monster-grid{grid-template-columns:repeat(3,1fr)}}@media(max-width:760px){.topbar{padding:10px 15px;height:70px}.logo{font-size:16px}.logo .sigil{font-size:31px}.logo small{font-size:7px}.wallet{font-size:11px;padding:7px 8px;gap:7px}.top-right{gap:8px}.top-right .button{font-size:11px;padding:10px}.app{display:block;padding:20px 14px 52px}.side-panel{margin-bottom:20px}.side-panel h1,.side-panel .intro{display:none}.side-panel>.overline{display:none}.island-list{flex-direction:row;overflow-x:auto;gap:8px;margin:0 0 12px;padding-bottom:3px}.island-entry{min-width:145px;padding:8px}.island-entry small{font-size:9px}.island-token{height:28px;width:28px}.nav{display:grid;grid-template-columns:repeat(5,1fr);padding-top:10px;gap:5px}.navitem{font-size:10px;text-align:center;display:flex;flex-direction:column;gap:3px;padding:8px 4px;line-height:1.15}.navitem span{font-size:19px}.tip-panel{display:none}.scene{height:255px;border-radius:18px}.scene-content{padding:23px}.scene h2{font-size:34px}.stage{grid-template-columns:repeat(4,1fr);gap:7px}.stage-slot{min-height:136px;padding:6px}.stage-slot .monster-art{height:81px}.stage-slot strong{font-size:10px}.stage-slot small{font-size:8px}.section-header h3{font-size:17px}.section-header p{font-size:10px}.section-header .button{font-size:11px;padding:10px 12px}.stage-actions{width:100%;justify-content:space-between}.stage-actions .button{flex:1}.lower-stats{gap:8px}.stat{padding:12px 8px}.stat span{font-size:8px}.stat strong{font-size:15px}#statReward{font-size:12px}.book-grid,.monster-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.book-item{padding:7px}.book-item .monster-art{height:100px}.book-item .book-name{font-size:11px}.book-item .book-sub{font-size:9px}.monster-card{padding:8px}.monster-card .monster-art{height:100px}.monster-card strong{font-size:13px}.monster-card p{font-size:10px;min-height:42px}.monster-card .button{font-size:11px;padding:9px 4px}.guide{display:block}.rule{margin-top:10px}.picker-list{grid-template-columns:repeat(3,minmax(0,1fr))}.modal-card{padding:20px}.modal-card h2{font-size:25px}.parent-pick{height:160px}.parent-pick .monster-art{width:100px;height:98px}.song-controls .wave{font-size:13px;letter-spacing:1px}#nowPlaying{font-size:10px}}
+@media(max-width:430px){.wallet{gap:5px;font-size:10px}.logo{font-size:13px}.logo .sigil{font-size:27px}.top-right .button{font-size:10px;padding:8px}.topbar{gap:7px;padding:8px}.book-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.monster-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.filter-row input{min-width:100%;}.filter-row select{flex:1}.scene{height:235px}.stage{grid-template-columns:repeat(4,1fr)}.stage-slot{min-height:120px}.stage-slot .monster-art{height:68px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important}}
+/* CHORUSWILD 1.1 — island archipelago, Castle/Bed economy and Nursery */
+#coins,#diamonds{font-variant-numeric:tabular-nums}
+.wallet span:last-child{color:#94e3ff}
+.island-entry.locked{opacity:.77;border-style:dashed;background:#111d25}
+.island-entry.locked .island-token{background:linear-gradient(145deg,#28343d,#17232b);font-size:14px}
+.island-entry.locked:hover{opacity:1;border-color:#b9d99b}
+.scene{background:linear-gradient(180deg,var(--scene-top,#102b36),var(--scene-mid,#245456) 68%,var(--scene-ground,#446d4e))}
+.scene .moon{box-shadow:0 0 75px #e9daa26b}
+.economy-grid{display:grid;grid-template-columns:1.12fr 1.12fr .85fr;gap:13px;margin:18px 0 12px}
+.economy-card{display:flex;align-items:flex-start;gap:10px;border:1px solid #35565a;border-radius:15px;padding:17px 15px;background:linear-gradient(145deg,#1a3436,#14272e);min-height:151px}
+.economy-card h3{font-size:15px;letter-spacing:-.02em;margin:3px 0 6px}
+.economy-card p{font-size:11px;line-height:1.5;color:#abc4bd;margin:0 0 13px}
+.structure-crest{font-size:23px;line-height:1.5;flex-shrink:0}
+.structure-copy{flex:1;min-width:0}
+.economy-card .button{width:100%;white-space:normal;font-size:11px;line-height:1.3;padding:9px 7px}
+.bed-meter{height:5px;border-radius:10px;overflow:hidden;background:#0a1c22;margin:-3px 0 11px}
+.bed-meter span{display:block;height:100%;border-radius:10px;background:linear-gradient(90deg,#7adcaa,#e2e18b)}
+.maxed{font-size:11px;color:#c9e6a0;font-weight:700}
+.daily-card{display:block}
+.daily-card h3{margin:3px 0 10px}
+.island-unlock{text-align:center;padding:5px 0}
+.island-unlock h3{font-family:Georgia,serif;font-size:23px;margin:0 0 8px}
+.island-unlock p{color:#bad0c8;line-height:1.55;font-size:12px}
+.island-unlock .card-tags{justify-content:center}
+.island-unlock .button{margin-top:9px}
+.island-orb{width:126px;height:126px;display:grid;place-items:center;border-radius:50%;margin:8px auto 17px;font-size:61px;color:#fff;box-shadow:inset -13px -18px 29px #0a161b6b,0 10px 35px #0006}
+.nursery{border:1px solid #557879;border-radius:14px;margin-top:20px;padding:18px;background:#152d33}
+.nursery p{color:#c2d4cf;font-size:12px;line-height:1.6;margin:8px 0 0}
+.nursery-title{font-weight:900;color:#d9e9b6;font-size:16px}
+.nursery .egg-row{display:flex;align-items:center;gap:14px;margin:12px 0}
+.egg-icon{display:grid;place-items:center;flex-shrink:0;width:72px;height:72px;border-radius:20px;background:radial-gradient(circle,#45635d,#1f3a3d);font-size:43px}
+.egg-icon.wobbling{animation:egg-wobble 1.8s ease-in-out infinite alternate}
+@keyframes egg-wobble{from{transform:rotate(-7deg)}to{transform:rotate(7deg)}}
+.nursery .button{margin-top:6px}
+.hatch-result{text-align:center}
+.hatch-result .monster-art{width:180px;height:180px;margin:10px auto;display:block}
+.hatch-result p{font-size:13px;color:#cee0d5;line-height:1.6}
+.hatch-result strong{display:block;font-size:12px;color:#cbeaa8;margin:0 0 15px}
+.owner-login{display:flex;flex-direction:column;gap:11px;margin-top:15px}
+.owner-login label,.owner-gift label{font-weight:800;font-size:12px;color:#d9eeb8}
+.owner-login input,.owner-gift select{border:1px solid #5e8079;border-radius:10px;background:#0d242a;color:#f3f7e8;padding:12px 13px;min-width:0}
+.owner-tools{display:flex;flex-direction:column;gap:15px;margin-top:17px}
+.owner-row{display:flex;gap:10px}
+.owner-row>.button,.owner-row>select{flex:1;min-width:0;white-space:normal}
+.owner-gift{border:1px solid #527a72;padding:15px;border-radius:13px;display:flex;flex-direction:column;gap:12px}
+.owner-gift .button{align-self:flex-start}
+.fineprint{font-size:11px!important;line-height:1.6!important;color:#90aba7!important}
+@media(max-width:1350px){.economy-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.daily-card{grid-column:1/-1;min-height:0}.daily-card .button{max-width:210px}}
+@media(max-width:760px){.nav{grid-template-columns:repeat(5,1fr)}.navitem{font-size:9px;padding:8px 2px}.navitem span{font-size:17px}.economy-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.economy-card{padding:12px 10px;min-height:160px}.economy-card h3{font-size:13px}.economy-card p{font-size:10px}.structure-crest{font-size:20px}.daily-card{min-height:0;grid-column:1/-1}.daily-card .button{max-width:220px}}
+@media(max-width:450px){.economy-grid{grid-template-columns:1fr}.economy-card{min-height:0}.daily-card{grid-column:auto}.owner-row{flex-direction:column}.stage{grid-template-columns:repeat(3,minmax(0,1fr))}.stage-slot{min-height:136px}.stage-slot .monster-art{height:79px}}
+
+/* Island-specific layered silhouettes, matching the selected song environment. */
+.scene .hills.far{background:var(--scene-mid)}
+.scene .hills.near{background:var(--scene-top)}
+.scene .moon{box-shadow:0 0 65px var(--scene-ground)}
+.economy-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(max-width:760px){.economy-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:450px){.economy-grid{grid-template-columns:1fr}}
+
+/* Castle expansion: paginate large monster collections instead of rendering them all. */
+.stage-pager{display:flex;align-items:center;justify-content:center;gap:14px;padding:16px 0 7px;color:#bcd2c7;font-size:12px;font-weight:700;flex-wrap:wrap}
+.stage-pager[hidden]{display:none}
+.stage-pager .button{padding:9px 12px;font-size:11px}
+.castle-hint{font-size:11px!important;line-height:1.45!important;color:#c0d1b5!important;margin-top:3px!important}
+
+</style></head>
+<body>
+<div class="ambient a1"></div><div class="ambient a2"></div>
+<header class="topbar"><a class="logo" href="#" aria-label="Choruswild home"><span class="sigil">✻</span><span>CHORUS<span class="logo-accent">WILD</span><small>ECHOES OF THE FIVE</small></span></a>
+<div class="top-right"><div class="wallet"><span>◈ <strong id="coins">0</strong></span><span>💎 <strong id="diamonds">0</strong></span></div><button id="audioToggle" class="button button-primary">▶ Play song</button></div></header>
+<main class="app"><div class="side-panel">
+<div class="overline">THE LIVING ARCHIPELAGO</div><h1>Build a world<br/><em>that sings.</em></h1><p class="intro">Find strange creatures, breed their elements, and build an original song—one voice at a time. Unlock islands, expand castles, and discover every rarity.</p>
+<div id="islandList" class="island-list"></div>
+<nav class="nav" aria-label="Game sections"><button class="navitem active" data-view="island"><span>✿</span> My Island</button><button class="navitem" data-view="breed"><span>◇</span> Breeding Grove</button><button class="navitem" data-view="shop"><span>✧</span> Creature Shop</button><button class="navitem" data-view="book"><span>▦</span> Monster Book</button><button class="navitem" id="ownerOpen"><span>⚙</span> Owner Panel</button></nav>
+<div class="tip-panel"><span class="tip-icon">✦</span><div><strong id="tipTitle">Start your chorus</strong><p id="tipText">Buy singles, breed new monsters and upgrade your Castle when you run out of Beds.</p></div></div>
+</div>
+<section class="content">
+<div class="view active" id="view-island">
+<div class="scene" id="scene"><div class="stars"></div><div class="moon"></div><div class="hills far"></div><div class="hills near"></div><div class="scene-content"><div class="scene-heading"><div class="overline">NOW SINGING ON</div><h2 id="islandHeading">Lantern Glade</h2><p id="islandSub"></p></div><div class="song-controls"><div class="wave" id="wave">▁ ▃ ▆ ▄ ▂ ▇ ▃ ▅ ▂ ▄ ▆ ▃ ▁</div><span id="nowPlaying">Add monsters to hear their voices</span></div></div></div>
+<div class="economy-grid"><div class="economy-card" id="castlePanel"></div><div class="economy-card" id="minePanel"></div><div class="economy-card" id="coinPanel"></div><div class="economy-card daily-card"><h3>🎁 Daily gift</h3><p>Collect a little diamond bonus once each day.</p><button id="dailyClaim" class="button button-ghost">Claim 3 💎</button></div></div>
+<div class="section-header"><div><h3>Your monster chorus <span id="stageCount" class="soft">0 voices</span></h3><p>Each placed monster uses Castle Beds. Remove one to send it into storage.</p></div><div class="stage-actions"><button id="demoToggle" class="button button-ghost">♫ Hear full chorus</button><button id="addToStage" class="button button-primary">+ Add a voice</button></div></div>
+<div id="stage" class="stage"></div><div id="stagePager" class="stage-pager" hidden></div>
+<div class="lower-stats"><div class="stat"><span>DISCOVERED</span><strong id="statFound">0 / 90</strong></div><div class="stat"><span>UNIQUE SPECIES</span><strong id="statSpecies">0 / 30</strong></div><div class="stat"><span>BEDS USED</span><strong id="statBeds">0 / 5</strong></div></div>
+</div>
+<div class="view" id="view-breed"><div class="view-head"><div class="overline">THE BREEDING GROVE</div><h2>Two voices. One surprise.</h2><p>Normal monsters combine unique elements. The three special classes follow secret, specific pairs.</p></div><div class="brew-layout"><div class="brew-workspace"><div class="parent-row"><button id="parentA" class="parent-pick"><span class="plus">+</span><span>Choose parent</span></button><div class="cross">✕</div><button id="parentB" class="parent-pick"><span class="plus">+</span><span>Choose parent</span></button></div><div id="prediction" class="prediction">Select two adult monsters to inspect their possible result.</div><div class="breed-actions"><label class="prism-checkbox"><input type="checkbox" id="diamondBoost"/><span>💎 Diamond bloom <small>(costs 5 diamonds; improves Rare/Epic odds)</small></span></label><button id="breedBtn" class="button button-primary" disabled>Breed monsters ✦</button></div><div class="outcome" id="outcome" hidden></div><div class="nursery" id="nurseryPanel"></div></div><div class="guide"><div class="overline">BREEDING RULES</div><h3>The five elements</h3><div id="elementLegend" class="element-legend"></div><div class="rule"><b>Normal • 2–5 elements</b><p>Combine two parents with no overlapping elements. Their combined elements determine the child, if that species exists.</p></div><div class="rule"><b>Legendary</b><p>Specific <strong>Triple + Double</strong> pairs.</p></div><div class="rule"><b>Mythical</b><p>Specific <strong>Quad + Triple</strong> pairs.</p></div><div class="rule"><b>Ethereal</b><p>Specific <strong>Quint + Quad</strong> pairs.</p></div><p class="fineprint">Rare forms are uncommon results from their species recipe. Epics are extremely uncommon and cannot breed. Breeding produces an egg in the Nursery. Hatch it when ready, or spend diamonds to speed up the timer.</p></div></div></div>
+<div class="view" id="view-shop"><div class="view-head"><div class="overline">CREATURE SHOP</div><h2>Little beginnings.</h2><p>Common singles available on the current island can be bought here. Each island has its own element selection. Other monsters come from breeding.</p></div><div id="shopGrid" class="monster-grid"></div></div>
+<div class="view" id="view-book"><div class="view-head"><div class="overline">THE MONSTER BOOK</div><h2>Every song has a secret.</h2><p>Find all 30 original species and their Common, Rare and Epic forms. That’s 90 discoveries.</p></div><div class="filter-row"><input id="bookSearch" type="search" placeholder="Search names or elements..." aria-label="Search creatures"/><select id="classFilter" aria-label="Filter by class"><option value="all">All classes</option><option>Normal</option><option>Legendary</option><option>Mythical</option><option>Ethereal</option></select><select id="rarityFilter" aria-label="Filter by rarity"><option value="all">All rarities</option><option>Common</option><option>Rare</option><option>Epic</option></select></div><div id="bookGrid" class="book-grid"></div></div>
+</section></main>
+<div id="modal" class="modal" hidden><div class="modal-backdrop" data-close></div><div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><button class="modal-close" data-close aria-label="Close">✕</button><h2 id="modalTitle"></h2><p id="modalSubtitle"></p><div id="modalBody"></div></div></div>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<footer><span>CHORUSWILD • A completely original monster music game</span><span>All creatures, melodies and artwork are original · Playable offline · Saves on this device</span></footer>
+<script>
+/* CHORUSWILD — original monsters, art direction, and music. */
+const ELEMENTS = {
+ root:{name:'Root',symbol:'❧',color:'#9adf75',glow:'#6eae69'},
+ ember:{name:'Ember',symbol:'✦',color:'#ff986d',glow:'#e46853'},
+ tide:{name:'Tide',symbol:'◈',color:'#76dce9',glow:'#3aa8bc'},
+ sky:{name:'Sky',symbol:'☁',color:'#c4b6ff',glow:'#8d7ddd'},
+ stone:{name:'Stone',symbol:'⬡',color:'#e5c6a0',glow:'#9f8a82'}
+};
+const CLASS_COLORS = {Normal:'#a7d5a7',Legendary:'#ffcc78',Mythical:'#c5a6ff',Ethereal:'#75e9e9'};
+const RARITY_COLORS = {Common:'#9aa6a8',Rare:'#79d5ff',Epic:'#fbc87c'};
+/* Each voice plays a deliberately authored melodic/rhythmic phrase over a 32-step / two-bar loop.
+   Tuple: sixteenth-step position, diatonic scale-degree relative to island, duration in steps. */
+const SPECIES = [
+ {id:'twigg',name:'Twigg',cls:'Normal',els:['root'],type:'pluck',desc:'A little sprout whose twigs tick out the song’s first heartbeat.',seq:[[0,0,3],[6,2,2],[10,3,2],[14,2,2],[16,0,3],[22,4,2],[26,2,2],[30,1,2]]},
+ {id:'flintro',name:'Flintro',cls:'Normal',els:['ember'],type:'shaker',desc:'Crackling ember feet dance in precise, fiery syncopation.',seq:[[2,5,1],[6,5,1],[10,5,1],[14,5,1],[18,5,1],[21,5,1],[26,5,1],[29,5,1]]},
+ {id:'puddli',name:'Puddli',cls:'Normal',els:['tide'],type:'bass',desc:'A bubble with a remarkably deep, round voice.',seq:[[0,0,5],[8,4,4],[16,3,5],[24,4,4]]},
+ {id:'zeffi',name:'Zeffi',cls:'Normal',els:['sky'],type:'whistle',desc:'A floating cloud seed that whistles between the breezes.',seq:[[4,7,4],[12,5,3],[20,6,4],[28,5,4]]},
+ {id:'craggit',name:'Craggit',cls:'Normal',els:['stone'],type:'kick',desc:'Two stone knuckles thump the island’s earthy pulse.',seq:[[0,0,1],[8,0,1],[16,0,1],[24,0,1],[30,0,1]]},
+ {id:'charoot',name:'Charoot',cls:'Normal',els:['root','ember'],type:'wood',desc:'Its hollow bark body snaps like a red-hot castanet.',seq:[[0,3,1],[3,3,1],[7,3,1],[10,3,1],[16,3,1],[19,3,1],[23,3,1],[27,3,1]]},
+ {id:'pondle',name:'Pondle',cls:'Normal',els:['root','tide'],type:'marimba',desc:'A lilypad dancer that taps a watery wooden melody.',seq:[[0,4,2],[4,2,2],[7,1,2],[12,2,2],[16,4,2],[20,5,2],[24,2,2],[28,0,3]]},
+ {id:'sprillow',name:'Sprillow',cls:'Normal',els:['root','sky'],type:'flute',desc:'A shy leaf-bird that sings from inside its own wings.',seq:[[3,4,4],[11,5,3],[19,7,3],[27,5,3]]},
+ {id:'pebroll',name:'Pebroll',cls:'Normal',els:['root','stone'],type:'tom',desc:'A moss-backed armadillo that rolls against hollow logs.',seq:[[0,0,1],[5,0,1],[8,0,1],[13,0,1],[16,0,1],[21,0,1],[24,0,1],[29,0,1]]},
+ {id:'steamfin',name:'Steamfin',cls:'Normal',els:['ember','tide'],type:'bubble',desc:'Tiny boiling fins pop out offbeat liquid notes.',seq:[[2,2,1],[6,4,1],[10,5,1],[14,4,1],[18,2,1],[22,4,1],[26,6,1],[30,5,1]]},
+ {id:'sparksail',name:'Sparksail',cls:'Normal',els:['ember','sky'],type:'bright',desc:'A kite spirit whose tail crackles with high notes.',seq:[[0,7,2],[7,6,2],[12,7,2],[16,9,2],[23,7,2],[28,6,2]]},
+ {id:'kilnkit',name:'Kilnkit',cls:'Normal',els:['ember','stone'],type:'snare',desc:'A furnace kitten drums on the ceramic plates of its back.',seq:[[4,0,1],[12,0,1],[20,0,1],[28,0,1],[31,0,1]]},
+ {id:'veyl',name:'Veyl',cls:'Normal',els:['tide','sky'],type:'pad',desc:'A translucent ray carries slow harmonies through the mist.',seq:[[0,0,8],[8,2,8],[16,3,8],[24,2,8]]},
+ {id:'barnubble',name:'Barnubble',cls:'Normal',els:['tide','stone'],type:'glass',desc:'A barnacled bell that rings when its shell opens.',seq:[[4,7,3],[12,6,3],[20,7,3],[28,4,3]]},
+ {id:'chimyr',name:'Chimyr',cls:'Normal',els:['sky','stone'],type:'chime',desc:'A wind chime creature with a crystal tail.',seq:[[1,7,3],[9,9,3],[17,7,3],[25,6,3]]},
+ {id:'dewlute',name:'Dewlute',cls:'Normal',els:['root','tide','sky'],type:'harp',desc:'Leaf strings across its back become a shimmering harp.',seq:[[0,7,3],[3,9,3],[6,7,3],[10,5,3],[16,6,3],[19,7,3],[22,5,3],[28,4,4]]},
+ {id:'brambell',name:'Brambell',cls:'Normal',els:['root','ember','stone'],type:'bell',desc:'A bramble stag whose glowing antlers are tuned bells.',seq:[[0,0,4],[8,4,4],[16,3,4],[24,7,4]]},
+ {id:'vaporoon',name:'Vaporoon',cls:'Normal',els:['ember','tide','sky'],type:'vocal',desc:'A sleepy steam dragon whose breath makes soft vowels.',seq:[[0,4,6],[8,5,6],[16,6,6],[24,5,6]]},
+ {id:'driftcap',name:'Driftcap',cls:'Normal',els:['root','sky','stone'],type:'reed',desc:'A wandering mushroom calls through its striped stem.',seq:[[2,5,3],[7,4,3],[12,2,3],[18,3,3],[23,2,3],[28,0,4]]},
+ {id:'gurglecap',name:'Gurglecap',cls:'Normal',els:['ember','tide','stone'],type:'bubble',desc:'This volcanic sea slug makes bubbling counter-melodies.',seq:[[1,0,2],[5,2,2],[9,4,2],[13,5,2],[17,3,2],[21,4,2],[25,2,2],[29,1,2]]},
+ {id:'cresthorn',name:'Cresthorn',cls:'Normal',els:['root','ember','tide','sky'],type:'brass',desc:'A four-element thunderbird sings bold, triumphant phrases.',seq:[[0,4,4],[6,5,2],[10,7,4],[16,6,4],[22,5,2],[26,4,6]]},
+ {id:'voltrunk',name:'Voltrunk',cls:'Normal',els:['root','ember','sky','stone'],type:'subbass',desc:'A towering stone-elephant with booming resonant tusks.',seq:[[0,0,6],[8,-1,6],[16,3,6],[24,2,6]]},
+ {id:'tidereel',name:'Tidereel',cls:'Normal',els:['ember','tide','sky','stone'],type:'organ',desc:'A ribbon-like leviathan plays chords along its scales.',seq:[[0,2,8],[8,4,8],[16,3,8],[24,5,8]]},
+ {id:'grandmoss',name:'Grandmoss',cls:'Normal',els:['root','ember','tide','sky','stone'],type:'choir',desc:'The five-element giant hums the island’s oldest harmony.',seq:[[0,0,8],[8,2,8],[16,4,8],[24,3,8]]},
+ {id:'bellmoth',name:'Bellmoth',cls:'Legendary',els:[],type:'musicbox',desc:'A golden-winged legend with a tiny rotating music box.',seq:[[0,7,2],[4,9,2],[8,11,3],[14,9,2],[16,7,2],[20,6,2],[24,9,3],[30,7,2]],parents:['dewlute','kilnkit']},
+ {id:'murkwhale',name:'Murkwhale',cls:'Legendary',els:[],type:'cello',desc:'The deep lake’s mythic singer drifts beneath the surface.',seq:[[0,-2,8],[10,0,6],[16,-1,8],[26,1,6]],parents:['brambell','veyl']},
+ {id:'dawnspire',name:'Dawnspire',cls:'Mythical',els:[],type:'crystal',desc:'An impossible crystal tower that rings at sunrise.',seq:[[0,9,3],[5,11,3],[10,12,4],[16,11,3],[21,9,3],[26,7,5]],parents:['cresthorn','brambell']},
+ {id:'lullumen',name:'Lullumen',cls:'Mythical',els:[],type:'dream',desc:'A star-eyed moth that sings quiet, luminous dreams.',seq:[[0,4,8],[12,5,4],[16,7,8],[28,5,4]],parents:['voltrunk','gurglecap']},
+ {id:'nullora',name:'Nullora',cls:'Ethereal',els:[],type:'ether',desc:'A many-eyed being of pure echo from the space between notes.',seq:[[0,0,7],[8,4,7],[16,3,7],[24,7,7]],parents:['grandmoss','cresthorn']},
+ {id:'vespyr',name:'Vespyr',cls:'Ethereal',els:[],type:'arpeggio',desc:'A celestial orbit-creature whose rings pulse in seventh chords.',seq:[[0,7,2],[2,9,2],[4,11,2],[6,14,2],[8,11,2],[10,9,2],[12,7,2],[14,9,2],[16,7,2],[18,10,2],[20,12,2],[22,14,2],[24,12,2],[26,10,2],[28,9,2],[30,7,2]],parents:['grandmoss','tidereel']}
+];
+const SPECIES_BY_ID = Object.fromEntries(SPECIES.map(s=>[s.id,s]));
+const CLASS_ORDER = ['Normal','Legendary','Mythical','Ethereal'];
+/* Eight original island environments. The first is the starter island;
+   all others must be bought with Coins or Diamonds before use. */
+const ISLANDS = [
+ {id:'glade',name:'Lantern Glade',sub:'The first song • warm, playful and leafy',bpm:104,key:0,progression:[0,3,1,2],scale:[0,2,4,7,9,12,14,16,19,21,24,26,28,31,33],colors:['#0c2932','#1c4d4f','#bfbc78'],reward:16,price:0,currency:'coins',els:['root','ember','tide','sky','stone'],symbol:'❧'},
+ {id:'cove',name:'Ember Cove',sub:'Ashes dance on the waves • playful percussion',bpm:120,key:5,progression:[0,2,4,3],scale:[0,2,3,5,7,9,10,12,14,15,17,19,21,22,24],colors:['#2c172f','#694035','#e7a76a'],reward:23,price:1800,currency:'coins',els:['ember','tide','sky','stone'],symbol:'☀'},
+ {id:'aether',name:'Astral Hollow',sub:'Dreams drift across the sky • shimmering echoes',bpm:88,key:9,progression:[0,1,3,1],scale:[0,2,4,6,9,11,12,14,16,18,21,23,24,26,28],colors:['#111d42','#3a3f79','#a6a4e5'],reward:28,price:3600,currency:'coins',els:['root','tide','sky','stone'],symbol:'☾'},
+ {id:'canopy',name:'Mosslight Canopy',sub:'A canopy of living instruments • sprightly and bright',bpm:112,key:2,progression:[0,4,2,1],scale:[0,2,4,5,7,9,11,12,14,16,17,19,21,23,24],colors:['#122e2b','#39704d','#c4dc85'],reward:34,price:5500,currency:'coins',els:['root','ember','tide','sky'],symbol:'✿'},
+ {id:'frost',name:'Crystal Tundra',sub:'Frozen glass harmonies • delicate and clear',bpm:93,key:7,progression:[0,2,1,4],scale:[0,2,3,5,7,8,10,12,14,15,17,19,20,22,24],colors:['#15273e','#38617e','#b7ebf0'],reward:41,price:7800,currency:'coins',els:['root','tide','sky','stone'],symbol:'❄'},
+ {id:'mesa',name:'Thunder Mesa',sub:'Echoes bounce between canyons • bold and stormy',bpm:130,key:4,progression:[0,3,4,1],scale:[0,2,4,7,9,11,12,14,16,19,21,23,24,26,28],colors:['#281e39','#79505c','#f9bd71'],reward:48,price:18,currency:'diamonds',els:['root','ember','sky','stone'],symbol:'ϟ'},
+ {id:'abyss',name:'Abyssal Lantern',sub:'Deepwater lanterns • haunting layered harmonies',bpm:81,key:1,progression:[0,1,4,2],scale:[0,1,3,5,7,8,10,12,13,15,17,19,20,22,24],colors:['#0a2432','#1b5366','#6ed5dd'],reward:55,price:35,currency:'diamonds',els:['root','ember','tide','sky','stone'],symbol:'◈'},
+ {id:'summit',name:'Crownwild Summit',sub:'All five elements meet • the grand finale',bpm:118,key:11,progression:[0,4,3,2],scale:[0,2,4,5,7,9,11,12,14,16,17,19,21,23,24],colors:['#202a45','#746586','#e9d795'],reward:68,price:55,currency:'diamonds',els:['root','ember','tide','sky','stone'],symbol:'♛'}
+];
+
+</script><script>
+/* Hand-authored SVG silhouettes: each of 30 species has a distinct anatomy.
+   Rares have extra species-specific features; Epics have different morphology and glow. */
+let artCounter=0;
+function creatureArt(id, rarity='Common'){
+ const s=SPECIES_BY_ID[id], rare=rarity==='Rare', epic=rarity==='Epic', special=s.cls!=='Normal';
+ const base=s.els.length?s.els.map(e=>ELEMENTS[e].color):[CLASS_COLORS[s.cls], '#b2d6de'];
+ let p=rare?'#8ec8ed':epic?'#ffc67f':base[0], a=rare?'#bb83eb':epic?'#f477c0':(base[1]||'#e9d59b');
+ let b=rare?'#d8f6ff':epic?'#fff5ae':base[2]||'#eff0d1';
+ const line=epic?'#633c7c':rare?'#355570':'#385058', glow=epic?'#ffd4ff':'#a6f9e8';
+ const uid='m'+(++artCounter), f=`url(#${uid})`;
+ const path=(d,fill=p,sw=3)=>`<path d="${d}" fill="${fill}" stroke="${line}" stroke-width="${sw}" stroke-linecap="round" stroke-linejoin="round"/>`;
+ const el=(x,y,rx,ry,fill=p,sw=3)=>`<ellipse cx="${x}" cy="${y}" rx="${rx}" ry="${ry}" fill="${fill}" stroke="${line}" stroke-width="${sw}"/>`;
+ const circ=(x,y,r,fill=a,sw=2)=>`<circle cx="${x}" cy="${y}" r="${r}" fill="${fill}" stroke="${line}" stroke-width="${sw}"/>`;
+ const rect=(x,y,w,h,rx,fill=p,sw=3)=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${rx}" fill="${fill}" stroke="${line}" stroke-width="${sw}"/>`;
+ const stroke=(d,color=line,width=4)=>`<path d="${d}" fill="none" stroke="${color}" stroke-width="${width}" stroke-linecap="round" stroke-linejoin="round"/>`;
+ const eye=(x,y,r=4)=>`<circle cx="${x}" cy="${y}" r="${r+2}" fill="#fdf9e8"/><circle cx="${x+1}" cy="${y}" r="${r}" fill="#233c47"/><circle cx="${x}" cy="${y-1}" r="1.5" fill="white"/>`;
+ const eyes=(x=69,y=78,gap=22,r=4)=>eye(x,y,r)+eye(x+gap,y,r);
+ const mouth=(x=80,y=94)=>stroke(`M${x-5} ${y} Q${x} ${y+5} ${x+5} ${y}`,line,2.5);
+ const dot=(x,y,rr=3)=>`<circle cx="${x}" cy="${y}" r="${rr}" fill="${b}" opacity=".92"/>`;
+ const star=(x,y,rr=7,color=b)=>path(`M${x} ${y-rr}L${x+rr*.25} ${y-rr*.25}L${x+rr} ${y}L${x+rr*.25} ${y+rr*.25}L${x} ${y+rr}L${x-rr*.25} ${y+rr*.25}L${x-rr} ${y}L${x-rr*.25} ${y-rr*.25}Z`,color,1);
+ const leaf=(x,y,rot=0,scale=1,fill=a)=>`<path d="M${x} ${y}q${-19*scale} ${-19*scale} ${-4*scale} ${-32*scale}q${22*scale} ${9*scale} ${4*scale} ${32*scale}Z" transform="rotate(${rot} ${x} ${y})" fill="${fill}" stroke="${line}" stroke-width="2.2"/>`;
+ const plume=(x,y,scale=1)=>path(`M${x} ${y}Q${x-22*scale} ${y-23*scale} ${x} ${y-56*scale}Q${x+30*scale} ${y-23*scale} ${x+6*scale} ${y-8*scale}Z`,a,2);
+ let g='', back='', front='';
+ switch(id){
+ case 'twigg':
+  back=stroke('M77 67Q66 41 49 36 M77 63Q92 39 110 31',line,5)+leaf(49,36,-20,1.1)+leaf(110,31,60,1.15);
+  if(rare)back+=leaf(66,27,-15,.75,b)+leaf(102,48,80,.8,b);
+  if(epic)back+=stroke('M80 56Q74 20 79 10 M87 55Q110 26 130 27',a,6)+leaf(80,11,20,.95)+leaf(130,27,70,1);
+  g=path('M57 68Q80 54 104 69L108 109Q95 132 80 129Q59 127 52 109Z',p)+path('M62 110Q79 100 98 110',a,1)+eyes(68,86,22,3.5)+mouth(81,100)+stroke('M64 126L57 138 M95 125L104 138',line,5);
+  front=leaf(80,65,10,.65,epic?b:a);break;
+ case 'flintro':
+  back=plume(77,82,1.2)+plume(54,98,.75)+plume(104,96,.76);
+  if(rare)back+=plume(42,103,.5)+plume(116,104,.5);
+  if(epic)back+=plume(80,71,1.45)+star(80,29,9);
+  g=el(80,96,34,30,p)+path('M52 99Q81 71 109 99L106 118Q80 134 55 116Z',a)+eyes(70,90,21)+mouth(81,109)+stroke('M57 121L44 135 M102 122L116 135',line,5);break;
+ case 'puddli':
+  back=circ(51,61,11,a)+circ(110,57,7,b)+circ(120,76,4,p);
+  if(rare)back+=circ(35,77,7,b)+circ(128,47,7,a);
+  if(epic)back+=circ(80,24,10,b)+circ(48,33,9,a);
+  g=path('M80 44C114 38 123 87 111 111C99 143 60 143 47 112C37 88 47 55 80 44Z',p)+el(77,105,27,20,a,1)+eyes(68,84,24)+mouth(80,102)+dot(60,72,5)+dot(106,107,5);break;
+ case 'zeffi':
+  back=el(51,82,21,16,a)+el(111,81,21,16,a)+stroke('M80 61L80 33',line,2);
+  if(rare)back+=el(39,77,13,12,b)+el(123,70,13,12,b);
+  if(epic)back+=star(80,21,12)+el(36,65,18,9,a)+el(124,65,18,9,a);
+  g=el(63,71,21,23,p)+el(89,64,27,25,p)+el(106,83,22,22,p)+el(70,93,32,27,p)+eyes(65,86,28,3.5)+mouth(80,103);break;
+ case 'craggit':
+  back=path('M36 89L25 80L23 105L42 113Z',a)+path('M124 90L140 79L136 110L120 115Z',a);
+  if(rare)back+=path('M38 58L45 30L62 48Z',b)+path('M99 48L117 28L118 61Z',b);
+  if(epic)back+=path('M59 54L80 18L102 54Z',b)+star(79,26,7);
+  g=path('M51 53L90 48L120 72L125 113L94 132L53 125L32 93Z',p)+path('M55 59L91 57L106 79L77 94L45 86Z',a)+eyes(66,93,24)+mouth(80,111);break;
+ case 'charoot':
+  back=stroke('M60 96L36 60 M99 92L124 62',line,9)+leaf(36,60,-30,.7)+leaf(125,62,40,.7);
+  if(rare)back+=leaf(38,44,-20,.7,b)+leaf(126,41,35,.7,b);
+  if(epic)back+=plume(80,60,.85)+plume(98,73,.5);
+  g=rect(54,48,52,83,19,p)+path('M58 58L102 58 M59 70L101 70 M58 117L101 117',a,1)+eyes(68,83,23)+mouth(80,102);break;
+ case 'pondle':
+  back=el(80,121,58,10,a)+stroke('M32 107L22 121 M127 107L139 121',line,6);
+  if(rare)back+=leaf(36,74,-85,.95,b);
+  if(epic)back+=circ(80,35,15,b)+leaf(107,53,30,.82,a);
+  g=el(80,91,45,33,p)+el(52,70,15,17,a)+el(108,70,15,17,a)+eyes(66,87,28)+mouth(82,106)+dot(54,100,4)+dot(107,100,4);break;
+ case 'sprillow':
+  back=path('M72 84Q28 48 28 102Q53 112 74 100Z',a)+path('M92 84Q132 45 135 99Q109 114 92 105Z',b);
+  if(rare)back+=leaf(30,82,-68,.65,p)+leaf(131,84,59,.65,p);
+  if(epic)back+=path('M72 80Q12 31 15 89Q40 126 70 106Z',a)+path('M93 81Q149 30 148 89Q126 126 92 107Z',b);
+  g=el(81,90,26,37,p)+path('M81 74L102 80L83 91Z',a,2)+eye(71,77,4)+stroke('M72 120L65 134 M92 120L97 134',line,4);break;
+ case 'pebroll':
+  back=stroke('M43 110L30 124 M116 109L134 124',line,7);
+  if(rare)back+=path('M57 64L65 36L81 59L100 39L111 69Z',b);
+  if(epic)back+=path('M45 67L55 34L73 57L85 21L102 57L116 38L122 77Z',b);
+  g=path('M29 97Q41 51 91 54Q132 59 129 106L110 127L52 127Z',p)+path('M52 64L69 111 M77 57L89 119 M103 62L112 111',a,4)+eyes(65,98,26)+mouth(81,115);break;
+ case 'steamfin':
+  back=path('M113 85L143 56L143 116Z',a)+circ(55,43,6,b)+circ(78,27,7,a);
+  if(rare)back+=circ(105,30,8,b)+circ(41,55,4,a);
+  if(epic)back+=path('M68 56L80 19L96 62Z',b)+circ(112,29,11,b);
+  g=el(78,88,48,29,p)+path('M68 66L83 45L99 68Z',a)+eyes(56,81,24)+mouth(76,100)+stroke('M70 113Q78 127 94 113',line,3);break;
+ case 'sparksail':
+  back=stroke('M80 102Q57 114 89 128T80 145',a,4)+star(89,130,7,a);
+  if(rare)back+=star(45,60,7,b)+star(116,57,6,b);
+  if(epic)back+=plume(81,65,.78)+star(82,20,9,b);
+  g=path('M80 31L129 86L80 118L31 85Z',p)+path('M80 35L81 116M32 85L128 85',a,2)+eyes(68,81,25)+mouth(82,97);break;
+ case 'kilnkit':
+  back=path('M49 79L51 38L75 60L93 60L114 36L114 84Z',a);
+  if(rare)back+=path('M52 38L64 15L74 57Z',b)+path('M97 57L109 15L114 37Z',b);
+  if(epic)back+=plume(80,50,.6)+plume(114,65,.35);
+  g=rect(40,63,80,65,19,p)+rect(59,107,42,20,9,a)+eyes(66,88,29)+path('M74 103L82 108L90 103Z',b)+stroke('M64 110L47 111M99 110L115 111',line,2);break;
+ case 'veyl':
+  back=path('M28 81Q42 50 81 50Q120 50 135 81Q119 78 106 118Q80 98 53 117Q42 86 28 81Z',a);
+  if(rare)back+=path('M25 75Q30 43 55 41M105 43Q129 43 137 76', 'none');
+  if(epic)back+=path('M14 76Q25 30 80 38Q136 31 149 76L126 100L81 68L34 101Z',b);
+  g=path('M35 84Q80 45 126 84Q111 112 80 119Q49 113 35 84Z',p)+eye(65,83,3)+eye(97,83,3)+mouth(81,99)+stroke('M81 114Q86 133 72 143',line,5);break;
+ case 'barnubble':
+  back=path('M46 103Q29 78 42 56L60 81Z',a)+path('M114 101Q129 77 118 55L102 81Z',a);
+  if(rare)back+=circ(39,67,9,b)+circ(123,68,9,b);
+  if(epic)back+=path('M78 68L79 23L99 65Z',b)+star(79,20,7);
+  g=path('M29 98Q42 39 80 43Q121 43 131 98Q102 135 80 129Q55 135 29 98Z',p)+path('M80 48L80 120M58 60L68 123M102 60L94 122',a,3)+eyes(66,99,28)+mouth(80,114);break;
+ case 'chimyr':
+  back=stroke('M80 15L80 46 M54 31L54 56 M109 32L109 58',a,4)+circ(80,16,6,b);
+  if(rare)back+=circ(43,43,7,b)+circ(119,44,7,b);
+  if(epic)back+=star(80,13,12)+star(49,28,7)+star(117,30,7);
+  g=path('M80 45L104 72L80 118L57 73Z',p)+path('M54 57L67 84L56 109L41 83Z',a)+path('M107 57L123 83L106 108L94 84Z',b)+eyes(71,78,18,3)+mouth(79,96);break;
+ case 'dewlute':
+  back=path('M40 90Q24 54 39 32Q64 38 72 70Z',a)+path('M113 90Q132 53 117 30Q91 37 90 70Z',b);
+  if(rare)back+=leaf(40,32,-25,.7,p)+leaf(118,31,30,.7,p);
+  if(epic)back+=stroke('M46 64L30 19 M107 64L126 18',b,6)+star(30,18,8)+star(126,17,8);
+  g=el(80,97,35,36,p)+path('M48 83Q80 47 112 82M56 68L56 117 M68 60L68 123M81 58L81 126M94 61L94 123',a,2)+eyes(70,92,22,3)+mouth(80,112);break;
+ case 'brambell':
+  back=stroke('M57 77L35 46L22 29M57 76L55 41L65 23M101 77L124 47L135 29M102 75L101 40L91 23',a,8);
+  if(rare)back+=circ(35,46,9,b)+circ(124,47,9,b);
+  if(epic)back+=star(22,27,10,b)+star(137,26,10,b)+star(80,22,9);
+  g=el(80,95,37,37,p)+path('M61 63L58 50L75 59 M87 59L105 48L100 64',a,2)+eyes(66,89,28)+mouth(80,107)+circ(44,111,8,a)+circ(119,111,8,a);break;
+ case 'vaporoon':
+  back=path('M58 89Q20 59 39 30Q78 52 72 83Z',a)+path('M105 88Q138 57 122 29Q89 46 93 85Z',b);
+  if(rare)back+=circ(30,50,9,b)+circ(135,51,9,b);
+  if(epic)back+=plume(80,69,1)+star(80,17,10);
+  g=path('M40 93Q49 59 73 65Q111 44 119 75Q136 102 106 121Q100 145 70 126Q41 132 40 93Z',p)+el(76,106,27,16,a,1)+eyes(67,83,27)+mouth(83,100)+stroke('M104 117Q130 127 121 144',line,5);break;
+ case 'driftcap':
+  back=path('M31 72Q34 19 81 18Q128 20 131 73Z',a);
+  if(rare)back+=circ(55,41,9,b)+circ(105,40,8,b);
+  if(epic)back+=path('M29 72Q27 3 80 7Q135 3 135 73Z',b)+star(80,10,10);
+  g=path('M29 74Q79 89 132 74Q109 99 94 103L105 132L57 132L66 103Q44 98 29 74Z',p)+rect(61,89,39,43,13,p)+eyes(68,108,24,3)+mouth(81,124)+dot(50,60,7)+dot(94,45,7);break;
+ case 'gurglecap':
+  back=circ(116,50,15,a)+circ(138,62,6,b)+circ(48,40,8,b);
+  if(rare)back+=circ(30,71,9,b)+circ(115,20,9,b);
+  if(epic)back+=star(119,19,9)+path('M59 70L80 27L103 71Z',b);
+  g=path('M25 107Q31 70 76 63Q132 53 135 103Q142 127 100 131L43 130Q22 126 25 107Z',p)+path('M46 75Q64 82 60 114M84 65Q105 83 98 120',a,4)+eyes(58,102,24)+mouth(69,118);break;
+ case 'cresthorn':
+  back=path('M72 93Q12 60 21 22Q61 34 80 74Q100 31 142 20Q149 68 92 94Z',a)+path('M56 76L39 26 M103 74L121 25',b,3);
+  if(rare)back+=path('M76 61L80 15L90 60Z',b);
+  if(epic)back+=star(81,14,13)+path('M44 71L14 44L19 95Z',b)+path('M117 71L148 44L143 95Z',b);
+  g=el(80,97,31,35,p)+path('M65 72L68 46L84 66L98 43L99 71Z',a)+eyes(67,91,27)+mouth(81,110)+stroke('M68 126L62 143 M94 126L101 142',line,5);break;
+ case 'voltrunk':
+  back=path('M56 59L36 35L26 70Z',a)+path('M106 59L128 34L138 70Z',a);
+  if(rare)back+=path('M52 69L43 24L70 61Z',b)+path('M107 69L120 24L91 61Z',b);
+  if(epic)back+=path('M53 61L49 14L71 53Z',b)+path('M105 61L115 14L89 53Z',b)+star(81,23,11);
+  g=rect(43,65,74,65,24,p)+el(82,81,43,35,p)+path('M72 94Q67 135 90 137Q103 134 94 124',a)+eyes(62,82,37,4)+stroke('M49 113L37 128 M110 113L124 128',line,5);break;
+ case 'tidereel':
+  back=stroke('M120 111Q144 88 126 64Q118 49 139 31',a,15);
+  if(rare)back+=circ(138,28,9,b)+circ(118,38,6,b);
+  if(epic)back+=star(140,20,12)+path('M59 52L80 18L100 53Z',b);
+  g=path('M24 91Q20 55 75 53Q114 49 119 89Q132 123 89 127Q45 134 24 110Z',p)+path('M41 61L53 91L65 57L77 93L90 58L104 93',a,4)+eyes(46,98,27)+mouth(60,115);break;
+ case 'grandmoss':
+  back=stroke('M48 87L26 55L17 27 M49 94L17 84 M109 86L135 50L145 30 M114 99L144 93',a,10)+leaf(17,27,-15,.8)+leaf(145,30,25,.8);
+  if(rare)back+=leaf(16,83,-55,.72,b)+leaf(143,91,50,.72,b);
+  if(epic)back+=star(80,12,13)+star(16,27,7)+star(146,29,7);
+  g=path('M55 36L103 35L124 62L130 117L109 139L52 139L30 115L34 62Z',p)+el(81,91,32,38,a,1)+eyes(63,80,34,4)+mouth(80,106)+circ(49,120,9,ELEMENTS.ember.color)+circ(72,124,9,ELEMENTS.tide.color)+circ(94,123,9,ELEMENTS.sky.color)+circ(116,118,9,ELEMENTS.stone.color);break;
+ case 'bellmoth':
+  back=path('M77 84Q6 20 22 101Q48 121 76 98Z',a)+path('M86 84Q157 20 141 101Q113 121 86 98Z',b);
+  if(rare)back+=circ(37,76,12,p)+circ(124,76,12,p);
+  if(epic)back+=path('M72 70Q5 0 13 94Q49 126 77 94Z',b)+path('M89 70Q156 0 149 94Q112 126 84 94Z',a);
+  g=el(81,92,22,34,p)+circ(80,73,11,a)+eyes(73,92,15,3)+mouth(80,109)+stroke('M77 60Q64 39 58 28M85 60Q98 39 106 28',line,3)+star(80,44,6);break;
+ case 'murkwhale':
+  back=path('M119 89L150 53L150 121Z',a)+path('M67 67L88 32L103 69Z',b);
+  if(rare)back+=circ(33,57,9,b)+circ(47,35,6,b);
+  if(epic)back+=path('M62 66L80 14L113 68Z',b)+star(81,14,8);
+  g=path('M21 89Q37 53 85 61Q122 60 125 92Q109 124 73 124Q33 125 21 89Z',p)+path('M40 100Q81 117 113 99',a,3)+eye(56,79,4)+stroke('M36 93Q49 103 67 96',line,3);break;
+ case 'dawnspire':
+  back=path('M80 20L108 48L118 121L80 138L40 121L49 49Z',a);
+  if(rare)back+=star(44,32,9)+star(118,33,9);
+  if(epic)back+=star(80,11,13)+path('M36 71L16 60L45 48ZM123 71L145 60L115 48Z',b);
+  g=path('M80 23L102 49L80 77L58 49Z',b)+path('M58 51L80 78L102 51L111 111L80 139L48 111Z',p)+path('M49 110L111 110M80 78L80 139',a,3)+eyes(69,103,22,3)+mouth(80,121);break;
+ case 'lullumen':
+  back=path('M71 84Q13 37 21 94Q42 125 69 99Z',a)+path('M91 83Q148 37 141 94Q120 125 94 99Z',b);
+  if(rare)back+=circ(36,82,10,p)+circ(125,82,10,p);
+  if(epic)back+=star(32,54,8)+star(130,54,8)+star(81,20,10);
+  g=el(81,89,23,35,p)+circ(82,64,17,b)+eyes(71,87,20,3)+mouth(81,107)+stroke('M73 59L60 40 M90 59L102 40',line,3);break;
+ case 'nullora':
+  back=path('M30 86Q10 49 41 32L66 59Q80 20 97 42Q127 20 138 59L119 94Q143 127 112 134L81 121Q44 142 33 119Z',a);
+  if(rare)back+=circ(27,55,9,b)+circ(136,34,9,b);
+  if(epic)back+=star(78,13,13)+star(19,77,8)+star(146,87,8);
+  g=path('M47 57Q79 32 115 58Q137 94 106 126Q83 148 52 119Q26 90 47 57Z',p)+circ(57,76,9,b)+circ(104,75,9,b)+eyes(69,98,24,4)+eye(81,65,3)+mouth(80,117);break;
+ case 'vespyr':
+  back=`<ellipse cx="80" cy="82" rx="68" ry="25" transform="rotate(25 80 82)" fill="none" stroke="${a}" stroke-width="8"/><ellipse cx="80" cy="82" rx="62" ry="26" transform="rotate(-28 80 82)" fill="none" stroke="${b}" stroke-width="6"/>`;
+  if(rare)back+=circ(25,77,10,b)+circ(136,92,10,b);
+  if(epic)back+=star(80,17,13)+star(135,50,9)+star(29,119,9);
+  g=circ(80,82,33,p)+circ(80,82,20,a)+eyes(70,80,22,3)+mouth(80,99)+circ(29,55,7,b)+circ(127,116,8,b);break;
+ }
+ if(!g)g=el(80,85,38,40,p)+eyes()+mouth();
+ // The three forms are not just a tinted base: each acquires additional anatomy above.
+ const shimmer=epic?`<circle cx="80" cy="80" r="62" fill="none" stroke="${glow}" stroke-width="1.6" stroke-dasharray="3 10" opacity=".7" class="epic-halo"/>`:'';
+ const crest=rare?`<circle cx="136" cy="26" r="5" fill="#f6f9ff" opacity=".95"/>`:epic?`${star(134,25,7,'#fff2b9')}${star(29,25,4,'#fff2b9')}`:'';
+ return `<svg class="monster-art rarity-${rarity.toLowerCase()}" viewBox="0 0 160 154" role="img" aria-label="${rarity} ${s.name}"><defs><radialGradient id="${uid}" cx="40%" cy="35%"><stop stop-color="${b}"/><stop offset="1" stop-color="${p}"/></radialGradient></defs><ellipse cx="81" cy="139" rx="45" ry="6" fill="#0b222e" opacity=".26"/>${shimmer}<g class="creature-bob">${back}${g}${front}</g>${crest}</svg>`;
+}
+
+</script><script>
+/* A genuine polyphonic Web Audio sequencer: no recorded MSM samples or copied melodies. */
+class ChorusEngine {
+ constructor(getParts,onCycle){this.getParts=getParts;this.onCycle=onCycle;this.ctx=null;this.master=null;this.running=false;this.nextTime=0;this.step=0;this.timer=null;this.noise=null;this.island=ISLANDS[0];this.generation=0;}
+ async start(){
+  const AudioCtor=window.AudioContext||window.webkitAudioContext;
+  if(!AudioCtor){throw Error('This browser does not support Web Audio.');}
+  if(!this.ctx){this.ctx=new AudioCtor();this.master=this.ctx.createGain();this.master.gain.value=.56;
+   const comp=this.ctx.createDynamicsCompressor();comp.threshold.value=-21;comp.knee.value=18;comp.ratio.value=5;comp.attack.value=.006;comp.release.value=.19;
+   this.master.connect(comp);comp.connect(this.ctx.destination);
+   const buffer=this.ctx.createBuffer(1,Math.ceil(this.ctx.sampleRate*.6),this.ctx.sampleRate);let dat=buffer.getChannelData(0);for(let i=0;i<dat.length;i++)dat[i]=Math.random()*2-1;this.noise=buffer;
+  }
+  await this.ctx.resume();this.generation++;this.running=true;this.step=0;this.nextTime=this.ctx.currentTime+.07;
+  this.timer=setInterval(()=>this.schedule(),24);this.schedule();
+ }
+ stop(){this.generation++;this.running=false;if(this.timer){clearInterval(this.timer);this.timer=null;}if(this.ctx)this.ctx.suspend().catch(()=>{});}
+ setIsland(island){this.island=island;this.step=0;if(this.ctx)this.nextTime=this.ctx.currentTime+.08;}
+ schedule(){if(!this.running||!this.ctx)return;let cap=0;
+  while(this.nextTime<this.ctx.currentTime+.14 && cap++<24){const step=this.step,phraseStep=step%32,section=Math.floor(step/32);const duration=60/this.island.bpm/4;
+   const shift=this.island.progression[section]||0;
+   const parts=this.getParts();
+   // A full rarity collection can contain 90+ monsters. Limit voices triggered per
+   // sixteenth-note to keep mobile browsers responsive, rotating priority fairly.
+   const maxNotes=18;let noteCount=0;
+   const start=parts.length?(step*17)%parts.length:0;
+   for(let j=0;j<parts.length && noteCount<maxNotes;j++){
+    const part=parts[(start+j)%parts.length];const s=SPECIES_BY_ID[part.id];if(!s)continue;
+    for(const note of s.seq){if(note[0]===phraseStep){
+      const latePhrase=section===3&&phraseStep>=24&&['harp','bright','crystal','arpeggio','chime'].includes(s.type);
+      const degree=note[1]+shift+(latePhrase?1:0);
+      this.playVoice(s,part.rarity,degree,note[2]*duration,this.nextTime);noteCount++;
+    }}
+   }
+   if(phraseStep===31){const cb=this.onCycle; // callbacks from the timer, not from audio graph
+    const generation=this.generation;setTimeout(()=>{if(this.running&&this.generation===generation)cb();},Math.max(0,(this.nextTime-this.ctx.currentTime)*1000));}
+   this.step=(step+1)%128;this.nextTime+=duration;
+  }
+ }
+ pitch(degree){const scale=this.island.scale;let semitone=degree<0?degree*2:degree<scale.length?scale[degree]:(scale[degree%scale.length]+24*Math.floor(degree/scale.length));return 48+this.island.key+semitone;}
+ freq(midi){return 440*Math.pow(2,(midi-69)/12);}
+ makeEnvelope(time,duration,volume,attack=.012,decay=.08,sustain=.42,release=.17){
+  const g=this.ctx.createGain();const a=Math.max(.002,attack),d=Math.max(.004,decay);const end=time+Math.max(.035,duration);
+  g.gain.setValueAtTime(.00001,time);g.gain.exponentialRampToValueAtTime(Math.max(.00011,volume),time+a);
+  g.gain.exponentialRampToValueAtTime(Math.max(.00011,volume*sustain),Math.min(time+a+d,end));
+  g.gain.setValueAtTime(Math.max(.00011,volume*sustain),end);
+  g.gain.exponentialRampToValueAtTime(.00001,end+release);g.connect(this.master);return {gain:g,end:end+release};
+ }
+ osc(freq,type,env,time,end,options={}){
+  const o=this.ctx.createOscillator();o.type=type;o.frequency.setValueAtTime(Math.max(25,Math.min(freq,4000)),time);
+  if(options.detune)o.detune.value=options.detune;
+  if(options.slide){o.frequency.exponentialRampToValueAtTime(Math.max(25,options.slide),Math.min(end,time+.16));}
+  if(options.lowpass){const fl=this.ctx.createBiquadFilter();fl.type='lowpass';fl.frequency.value=options.lowpass;o.connect(fl);fl.connect(env);}else{o.connect(env);}
+  o.start(time);o.stop(end+.04);return o;
+ }
+ noiseHit(time,vol=0.09,high=true,tail=.08){const src=this.ctx.createBufferSource();src.buffer=this.noise;const filter=this.ctx.createBiquadFilter();filter.type=high?'highpass':'lowpass';filter.frequency.value=high?3800:950;const gain=this.ctx.createGain();gain.gain.setValueAtTime(Math.max(.0001,vol),time);gain.gain.exponentialRampToValueAtTime(.00001,time+tail);src.connect(filter);filter.connect(gain);gain.connect(this.master);src.start(time);src.stop(time+tail+.03);}
+ playVoice(s,rarity,degree,length,time){
+  const t=s.type, isEpic=rarity==='Epic',isRare=rarity==='Rare';
+  // Rares add a restrained upper harmony; Epics sparkle in a different register.
+  const offset={pluck:12,shaker:0,bass:-12,whistle:24,kick:0,wood:12,marimba:12,flute:24,tom:0,bubble:12,bright:16,snare:0,pad:12,glass:24,chime:20,harp:20,bell:20,vocal:12,reed:12,brass:12,subbass:-12,organ:12,choir:0,musicbox:22,cello:-12,crystal:23,dream:12,ether:12,arpeggio:16}[t]||12;
+  let freq=this.freq(this.pitch(degree)+offset);
+  if(t==='shaker'){this.noiseHit(time,.065,true,.055);if(isEpic)this.noiseHit(time+.055,.025,true,.043);return;}
+  if(t==='snare'){this.noiseHit(time,.13,true,.13);const ev=this.makeEnvelope(time,.065,.057,.002,.02,.1,.08);this.osc(165,'triangle',ev.gain,time,ev.end,{slide:85});return;}
+  if(t==='kick'||t==='tom'){const ev=this.makeEnvelope(time,.15,t==='kick'?.20:.10,.003,.035,.05,.09);this.osc(t==='kick'?125:180,'sine',ev.gain,time,ev.end,{slide:t==='kick'?43:78});if(isRare)this.noiseHit(time,.035,false,.045);return;}
+  const voice={
+   pluck:['triangle',.075,.002,.10,.12,.09,0],bass:['sine',.19,.004,.08,.7,.15,0],whistle:['sine',.063,.04,.05,.57,.14,0],wood:['square',.045,.002,.024,.12,.055,950],marimba:['sine',.11,.004,.09,.15,.12,0],flute:['sine',.075,.045,.08,.64,.14,0],bubble:['sine',.09,.005,.08,.22,.12,0],bright:['triangle',.066,.006,.08,.28,.2,0],pad:['sawtooth',.042,.15,.19,.74,.4,820],glass:['sine',.085,.004,.06,.18,.52,0],chime:['sine',.090,.003,.05,.15,.46,0],harp:['triangle',.085,.005,.10,.15,.2,0],bell:['sine',.115,.002,.05,.16,.45,0],vocal:['sawtooth',.060,.09,.11,.6,.26,1150],reed:['square',.055,.03,.09,.65,.16,1300],brass:['sawtooth',.085,.036,.16,.6,.24,1000],subbass:['sine',.195,.02,.09,.68,.17,0],organ:['triangle',.080,.05,.11,.8,.25,0],choir:['sawtooth',.047,.18,.15,.65,.39,900],musicbox:['sine',.08,.003,.11,.12,.48,0],cello:['sawtooth',.063,.11,.17,.7,.24,750],crystal:['sine',.080,.004,.12,.19,.52,0],dream:['triangle',.055,.14,.17,.72,.47,1150],ether:['sine',.10,.12,.12,.65,.4,0],arpeggio:['sine',.061,.003,.08,.30,.22,0]
+  }[t]||['sine',.07,.01,.07,.4,.2,0];
+  let [wave,vol,attack,decay,sustain,release,lowpass]=voice;
+  const ev=this.makeEnvelope(time,Math.max(length*.78,.08),vol,attack,decay,sustain,release);
+  this.osc(freq,wave,ev.gain,time,ev.end,{lowpass});
+  if(['glass','chime','bell','musicbox','crystal','arpeggio'].includes(t)){
+   const overtone=this.makeEnvelope(time,length*.55,vol*.24,.004,.12,.05,release*.9);this.osc(freq*2.997,'sine',overtone.gain,time,overtone.end);
+  }
+  if(['pad','organ','choir','dream','ether'].includes(t)){
+   const harm=this.makeEnvelope(time,length*.75,vol*.32,attack,.09,sustain,.31);this.osc(freq*1.5,'sine',harm.gain,time,harm.end);
+  }
+  if(isRare){const ev2=this.makeEnvelope(time+.01,Math.max(.1,length*.6),vol*.2,.02,.07,.28,.19);this.osc(freq*1.4983,'sine',ev2.gain,time+.01,ev2.end);}
+  if(isEpic){const ev3=this.makeEnvelope(time+.016,Math.max(.1,length*.7),vol*.30,.008,.12,.16,.37);this.osc(freq*2,'sine',ev3.gain,time+.016,ev3.end);}
+ }
+}
+
+</script><script>
+/* CHORUSWILD 1.2 — expanded castles and complete rarity collections.
+   Everything runs offline in the player's own browser. No copied MSM assets. */
+(()=>{'use strict';
+const $=s=>document.querySelector(s), $$=s=>Array.from(document.querySelectorAll(s));
+const SAVE_KEY='choruswild-echoes-v1'; // Keep the old key: existing saves are migrated.
+const RARITIES=['Common','Rare','Epic'], PRICE_SINGLE=95, BREED_PRICE=40, BLOOM_PRICE=5;
+const MAX_PLACED_MONSTERS=600, STAGE_PAGE_SIZE=24, MINE_INTERVAL=8*60*1000, DAILY_INTERVAL=24*60*60*1000;
+const CASTLE_LEVELS=[
+ {beds:5}, {beds:10,price:450,currency:'coins'},
+ {beds:16,price:1350,currency:'coins'}, {beds:25,price:3600,currency:'coins'},
+ {beds:36,price:7200,currency:'coins'}, {beds:50,price:12,currency:'diamonds'},
+ {beds:68,price:24,currency:'diamonds'}, {beds:90,price:40,currency:'diamonds'},
+ {beds:120,price:55,currency:'diamonds'}, {beds:160,price:75,currency:'diamonds'},
+ {beds:210,price:100,currency:'diamonds'}, {beds:260,price:125,currency:'diamonds'},
+ {beds:320,price:175,currency:'diamonds'}, {beds:420,price:250,currency:'diamonds'},
+ {beds:600,price:350,currency:'diamonds'}
+];
+const byIsland=id=>ISLANDS.find(is=>is.id===id), keyOf=(id,rarity)=>`${id}|${rarity}`;
+const newId=()=>Math.random().toString(36).slice(2,11)+Date.now().toString(36).slice(-5);
+const format=n=>Math.floor(n).toLocaleString();
+const symbolFor=currency=>currency==='diamonds'?'💎':'◈';
+const costText=(n,currency)=>`${format(n)} ${symbolFor(currency)}`;
+const coinAmount=n=>Number.isFinite(n)?Math.max(0,Math.min(1e12,Math.floor(n))):0;
+const now=()=>Date.now();
+function fresh(){const starter={uid:newId(),id:'twigg',rarity:'Common'};
+ return {coins:900,diamonds:12,inventory:[starter],discovered:[keyOf('twigg','Common')],
+  stages:Object.fromEntries(ISLANDS.map(is=>[is.id,is.id==='glade'?[starter.uid]:[]])),
+  purchased:['glade'],castles:Object.fromEntries(ISLANDS.map(is=>[is.id,0])),
+  mines:{},eggs:{},income:{},dailyLast:0,island:'glade',view:'island',breeds:0,cycles:0};
+}
+function bedCost(mon){if(!mon)return 0;const s=SPECIES_BY_ID[mon.id];if(!s)return 0;
+ return s.cls==='Normal'?s.els.length:s.cls==='Ethereal'?3:2;
+}
+function bedsUsed(islandId){return (state.stages[islandId]||[]).reduce((n,uid)=>n+bedCost(item(uid)),0);}
+function bedCapacity(islandId){return CASTLE_LEVELS[state.castles[islandId]||0].beds;}
+function allowed(monId,islandId){const s=SPECIES_BY_ID[monId],is=byIsland(islandId);
+ return !!s&&!!is&&(s.cls!=='Normal'||s.els.every(e=>is.els.includes(e)));
+}
+function migrateSave(obj){
+ const baseline=fresh();
+ if(!obj||!Array.isArray(obj.inventory)||!Array.isArray(obj.discovered)||!obj.stages)return baseline;
+ const v={...baseline,...obj};
+ v.coins=coinAmount(obj.coins);v.diamonds=coinAmount(Number.isFinite(obj.diamonds)?obj.diamonds:(Number.isFinite(obj.prisms)?obj.prisms:12));
+ v.inventory=obj.inventory.filter(m=>m&&SPECIES_BY_ID[m.id]&&RARITIES.includes(m.rarity)&&typeof m.uid==='string');
+ const ids=new Set();v.inventory=v.inventory.filter(m=>!ids.has(m.uid)&&!!ids.add(m.uid));
+ v.discovered=Array.from(new Set([...obj.discovered,...v.inventory.map(m=>keyOf(m.id,m.rarity))])).filter(k=>typeof k==='string'&&SPECIES_BY_ID[k.split('|')[0]]&&RARITIES.includes(k.split('|')[1]));
+ v.stages=Object.fromEntries(ISLANDS.map(is=>[is.id,Array.isArray(obj.stages[is.id])?obj.stages[is.id].filter(uid=>ids.has(uid)):[]]));
+ const seen=new Set();
+ // Old build permitted the exact same creature instance to sing on multiple islands.
+ // Keep its first legitimate location, and send other copies back into inventory.
+ const order=[...ISLANDS.map(is=>is.id)];
+ for(const id of order)v.stages[id]=v.stages[id].filter(uid=>!seen.has(uid)&&!!seen.add(uid)).slice(0,MAX_PLACED_MONSTERS);
+ v.purchased=Array.isArray(obj.purchased)?obj.purchased.filter(id=>byIsland(id)):[
+  'glade',...ISLANDS.filter(is=>v.stages[is.id].length||obj.island===is.id).map(is=>is.id)];
+ v.purchased=Array.from(new Set(['glade',...v.purchased]));
+ v.castles={...baseline.castles,...(obj.castles||{})};
+ for(const is of ISLANDS){
+  let lev=Number.isInteger(v.castles[is.id])?Math.max(0,Math.min(CASTLE_LEVELS.length-1,v.castles[is.id])):0;
+  // Existing stages should never lose their monsters because of the new bed mechanic.
+  const needed=v.stages[is.id].reduce((n,uid)=>n+bedCost(v.inventory.find(i=>i.uid===uid)),0);
+  while(lev<CASTLE_LEVELS.length-1&&CASTLE_LEVELS[lev].beds<needed)lev++;
+  v.castles[is.id]=lev;
+ }
+ v.mines={};for(const [is,m] of Object.entries(obj.mines||{}))if(byIsland(is)&&m&&Number.isFinite(m.lastCollected))v.mines[is]={lastCollected:Math.min(now(),Math.max(0,m.lastCollected))};
+ v.eggs={};for(const [is,e] of Object.entries(obj.eggs||{}))if(byIsland(is)&&e&&SPECIES_BY_ID[e.id]&&RARITIES.includes(e.rarity)&&Number.isFinite(e.readyAt))v.eggs[is]={id:e.id,rarity:e.rarity,readyAt:e.readyAt,wasNew:!!e.wasNew,failed:!!e.failed};
+ v.income={};for(const [is,inc] of Object.entries(obj.income||{}))if(byIsland(is)&&inc&&Number.isFinite(inc.lastUpdated)&&Number.isFinite(inc.unclaimed))v.income[is]={lastUpdated:Math.min(now(),Math.max(0,inc.lastUpdated)),unclaimed:Math.max(0,Math.min(1e9,inc.unclaimed))};
+ v.dailyLast=Number.isFinite(obj.dailyLast)?obj.dailyLast:0;
+ v.island=byIsland(obj.island)&&v.purchased.includes(obj.island)?obj.island:'glade';
+ v.view='island';v.breeds=coinAmount(obj.breeds||0);v.cycles=coinAmount(obj.cycles||0);
+ delete v.prisms;
+ return v;
+}
+function load(){try{const raw=localStorage.getItem(SAVE_KEY);return raw?migrateSave(JSON.parse(raw)):fresh();}catch(e){console.warn('Save could not be read',e);return fresh();}}
+let state=load(),selectedParents=[null,null],toastTimer=null,demoOn=false,ownerAuthenticated=false,stagePage=0;
+for(const is of ISLANDS)if(!state.income[is.id])state.income[is.id]={lastUpdated:now(),unclaimed:0};
+const DEMO_STAGES={
+ glade:['craggit','puddli','charoot','pondle','zeffi','dewlute','brambell','grandmoss'],
+ cove:['craggit','kilnkit','flintro','steamfin','sparksail','vaporoon','cresthorn','bellmoth'],
+ aether:['murkwhale','veyl','chimyr','gurglecap','driftcap','lullumen','nullora','vespyr'],
+ canopy:['twigg','charoot','sprillow','pondle','driftcap','dewlute','cresthorn','bellmoth'],
+ frost:['zeffi','craggit','barnubble','chimyr','veyl','brambell','lullumen','vespyr'],
+ mesa:['kilnkit','sparksail','pebroll','brambell','driftcap','voltrunk','dawnspire','grandmoss'],
+ abyss:['puddli','steamfin','gurglecap','veyl','tidereel','murkwhale','nullora','vespyr'],
+ summit:['twigg','flintro','puddli','zeffi','craggit','cresthorn','grandmoss','nullora']
+};
+const engine=new ChorusEngine(()=>demoOn?DEMO_STAGES[state.island].map(id=>({id,rarity:'Common'})):
+ (state.stages[state.island]||[]).map(uid=>item(uid)).filter(Boolean),onSongCycle);
+engine.setIsland(byIsland(state.island));
+function persist(){try{localStorage.setItem(SAVE_KEY,JSON.stringify(state));}catch(e){console.warn('Could not save progress',e);}}
+function uiToast(message){const el=$('#toast');el.textContent=message;el.classList.add('visible');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('visible'),2800);}
+function item(uid){return state.inventory.find(m=>m.uid===uid);}
+function has(id,rarity){return state.discovered.includes(keyOf(id,rarity));}
+function discover(mon){const k=keyOf(mon.id,mon.rarity);if(!state.discovered.includes(k))state.discovered.push(k);}
+function elmChips(elements){return elements.map(e=>`<span class="element-chip"><b style="color:${ELEMENTS[e].color}">${ELEMENTS[e].symbol}</b> ${ELEMENTS[e].name}</span>`).join('');}
+function rarityColor(r){return RARITY_COLORS[r]||'#ddd';}
+function isPlaced(uid){return ISLANDS.some(is=>state.stages[is.id].includes(uid));}
+function spend(amount,currency){if(!Number.isFinite(amount)||amount<0||state[currency]<amount)return false;state[currency]-=amount;persist();return true;}
+function onSongCycle(){if(demoOn||!state.purchased.includes(state.island))return;
+ const count=state.stages[state.island].length;if(!count)return;
+ const is=byIsland(state.island);state.cycles++;
+ state.coins+=is.reward+Math.min(count*2,24);
+ // Very occasional diamond bonus, unlike the v1 unlimited Prism shower.
+ if(state.cycles%16===0)state.diamonds++;
+ persist();renderWallet();renderIslandEconomy();
+}
+function renderWallet(){$('#coins').textContent=format(state.coins);$('#diamonds').textContent=format(state.diamonds);}
+function renderIslands(){const list=$('#islandList');
+ list.innerHTML=ISLANDS.map(is=>{const owned=state.purchased.includes(is.id);
+  return `<button class="island-entry ${state.island===is.id?'active':''} ${owned?'':'locked'}" data-island="${is.id}" aria-label="${is.name}: ${owned?'owned':`buy for ${costText(is.price,is.currency)}`}" title="${owned?'Visit island':'Unlock island'}"><span class="island-token">${owned?is.symbol:'🔒'}</span><span><strong>${is.name}</strong><small>${owned?`${is.bpm} BPM · ${state.stages[is.id].length} monsters`:`${costText(is.price,is.currency)} · locked`}</small></span></button>`;
+ }).join('');
+ list.querySelectorAll('[data-island]').forEach(b=>b.onclick=()=>chooseIsland(b.dataset.island));
+}
+function chooseIsland(id){const is=byIsland(id);if(!is)return;
+ if(!state.purchased.includes(id)){
+  const info=`<div class="island-unlock"><div class="island-orb" style="background:linear-gradient(145deg,${is.colors.join(',')})">${is.symbol}</div>
+  <div class="overline">NEW ISLAND</div><h3>${is.name}</h3><p>${is.sub}</p>
+  <div class="card-tags">${elmChips(is.els)}</div><p>Includes a new Castle, an independent Nursery and its own song.</p>
+  <button class="button button-primary" id="confirmIslandBuy">Unlock for ${costText(is.price,is.currency)}</button></div>`;
+  showModal('Unlock an island',`You currently have ${costText(state[is.currency],is.currency)}.`,info);
+  $('#confirmIslandBuy').onclick=()=>{
+   if(!spend(is.price,is.currency)){uiToast('Not enough '+(is.currency==='coins'?'coins.':'diamonds.'));return;}
+   state.purchased.push(id);switchIsland(id);closeModal();uiToast(`Unlocked ${is.name}! ✨`);
+  };return;
+ }
+ switchIsland(id);
+}
+function switchIsland(id){if(!state.purchased.includes(id))return;
+ state.island=id;selectedParents=[null,null];demoOn=false;stagePage=0;
+ engine.setIsland(byIsland(id));persist();renderAll();switchView('island',false);
+}
+function renderNav(){$$('.navitem[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===state.view));$$('.view').forEach(v=>v.classList.toggle('active',v.id==='view-'+state.view));}
+function switchView(view,scroll=true){if(!['island','shop','book','breed'].includes(view))return;state.view=view;renderAll();if(scroll)window.scrollTo({top:0,behavior:'smooth'});}
+function renderStage(){const is=byIsland(state.island);
+ const monsters=demoOn?DEMO_STAGES[state.island].map(id=>({uid:null,id,rarity:'Common'})):state.stages[state.island].map(uid=>item(uid)).filter(Boolean);
+ $('#scene').dataset.island=is.id;$('#scene').classList.toggle('playing',engine.running);
+ $('#scene').style.setProperty('--scene-top',is.colors[0]);$('#scene').style.setProperty('--scene-mid',is.colors[1]);$('#scene').style.setProperty('--scene-ground',is.colors[2]);
+ $('#demoToggle').classList.toggle('button-primary',demoOn);$('#demoToggle').classList.toggle('button-ghost',!demoOn);
+ $('#demoToggle').textContent=demoOn?'■ Exit demo':'♫ Hear full chorus';
+ $('#islandHeading').textContent=is.name;$('#islandSub').textContent=is.sub;
+ $('#nowPlaying').textContent=demoOn?'Preview choir • no coins earned':engine.running?'♫ Your monsters are singing':monsters.length?'Press Play song to hear your arrangement':'Place a monster to start your song';
+ $('#stageCount').textContent=demoOn?'8 demo monsters':`${monsters.length} monsters · ${bedsUsed(is.id)} / ${bedCapacity(is.id)} beds`;
+ $('#statFound').textContent=`${state.discovered.length} / ${SPECIES.length*3}`;
+ $('#statSpecies').textContent=`${new Set(state.discovered.map(k=>k.split('|')[0])).size} / ${SPECIES.length}`;
+ $('#statBeds').textContent=demoOn?'Preview':`${bedsUsed(is.id)} / ${bedCapacity(is.id)}`;
+ // A castle with hundreds of Beds should not produce hundreds of SVGs on one screen.
+ const pages=Math.max(1,Math.ceil(monsters.length/STAGE_PAGE_SIZE));stagePage=Math.max(0,Math.min(stagePage,pages-1));
+ const visible=monsters.slice(stagePage*STAGE_PAGE_SIZE,(stagePage+1)*STAGE_PAGE_SIZE);
+ const spaceForEmpty=demoOn?0:Math.min(4,Math.max(0,bedCapacity(is.id)-bedsUsed(is.id)),Math.max(0,STAGE_PAGE_SIZE-visible.length));
+ const showSlots=Math.max(4,visible.length+spaceForEmpty);
+ $('#stage').innerHTML=Array.from({length:showSlots},(_,n)=>{const v=visible[n];if(!v)return demoOn?'':`<button class="stage-slot empty" data-open-add><span class="empty-icon">+</span>Place monster</button>`;
+  const s=SPECIES_BY_ID[v.id];return `<div class="stage-slot filled ${engine.running?'song-on':''}">${demoOn?'':`<button class="remove" data-remove="${v.uid}" title="Move to storage" aria-label="Store ${s.name}">✕</button>`}
+  ${creatureArt(v.id,v.rarity)}<strong>${s.name}</strong><small style="color:${rarityColor(v.rarity)}">${demoOn?'Preview':v.rarity} · ${bedCost(v)} bed${bedCost(v)===1?'':'s'}</small></div>`;
+ }).join('');
+ $('#stage').querySelectorAll('[data-remove]').forEach(b=>b.onclick=()=>{
+  accrueIncome(state.island);state.stages[state.island]=state.stages[state.island].filter(uid=>uid!==b.dataset.remove);persist();renderAll();uiToast('Monster moved to storage.');
+ });
+ $('#stage').querySelectorAll('[data-open-add]').forEach(b=>b.onclick=openStagePicker);
+ const pager=$('#stagePager');pager.hidden=demoOn||pages<=1;
+ if(!pager.hidden){pager.innerHTML=`<button class="button button-ghost" id="prevStage" ${stagePage===0?'disabled':''}>← Previous</button><span>Monsters ${stagePage*STAGE_PAGE_SIZE+1}–${Math.min(monsters.length,(stagePage+1)*STAGE_PAGE_SIZE)} of ${monsters.length} · Page ${stagePage+1} / ${pages}</span><button class="button button-ghost" id="nextStage" ${stagePage>=pages-1?'disabled':''}>Next →</button>`;
+  $('#prevStage').onclick=()=>{if(stagePage>0){stagePage--;renderStage();}};
+  $('#nextStage').onclick=()=>{if(stagePage<pages-1){stagePage++;renderStage();}};
+ }
+ $('#addToStage').disabled=demoOn||monsters.length>=MAX_PLACED_MONSTERS;
+}
+/* Coin production is based on monsters living on each island, even while offline.
+   Before changing island occupants, settle earnings using the *old* occupants so
+   moving a powerful monster cannot retroactively multiply earnings. */
+function coinRate(islandId){return state.stages[islandId].reduce((total,uid)=>{
+ const m=item(uid),s=m&&SPECIES_BY_ID[m.id];if(!s)return total;
+ const base=s.cls==='Normal'?7+s.els.length*4:27;
+ return total+base*(m.rarity==='Epic'?2:m.rarity==='Rare'?1.5:1);
+},0);}
+function unclaimedCoins(islandId){const inc=state.income[islandId]||{lastUpdated:now(),unclaimed:0};
+ const minutes=Math.max(0,Math.min(120,(now()-inc.lastUpdated)/60000));
+ return inc.unclaimed+minutes*coinRate(islandId);
+}
+function accrueIncome(islandId){if(!state.income[islandId])state.income[islandId]={lastUpdated:now(),unclaimed:0};
+ const inc=state.income[islandId];inc.unclaimed=unclaimedCoins(islandId);inc.lastUpdated=now();}
+function collectCoins(){const id=state.island;accrueIncome(id);const n=Math.floor(state.income[id].unclaimed);
+ if(n<1){uiToast('Your monsters are still producing coins.');return;}
+ state.income[id].unclaimed-=n;state.coins+=n;persist();renderAll();uiToast(`Collected ${format(n)} coins from ${byIsland(id).name}!`);}
+function nextCastlePrice(islandId){const level=state.castles[islandId]||0;
+ if(level>=CASTLE_LEVELS.length-1)return null;
+ const next=CASTLE_LEVELS[level+1],idx=ISLANDS.findIndex(is=>is.id===islandId);
+ return {beds:next.beds,price:next.currency==='coins'?Math.ceil(next.price*(1+idx*.18)/50)*50:next.price,currency:next.currency};
+}
+function mineCount(islandId){const mine=state.mines[islandId];if(!mine)return 0;return Math.max(0,Math.min(3,Math.floor((now()-mine.lastCollected)/MINE_INTERVAL)));}
+function renderIslandEconomy(){const id=state.island,is=byIsland(id),lev=state.castles[id],next=nextCastlePrice(id),used=bedsUsed(id),beds=bedCapacity(id);
+ const completeSet=SPECIES.filter(s=>allowed(s.id,id));
+ const completeBeds=completeSet.reduce((sum,s)=>sum+3*bedCost({id:s.id}),0);
+ $('#castlePanel').innerHTML=`<div class="structure-crest">🏰</div><div class="structure-copy"><h3>Castle · Level ${lev+1}</h3><p>${used} / ${beds} beds occupied</p><p class="castle-hint">Complete Common, Rare &amp; Epic set: ${completeBeds} Beds for ${completeSet.length*3} monsters. Rarities have equal Bed costs.</p><div class="bed-meter"><span style="width:${Math.min(100,100*used/beds)}%"></span></div>
+ ${next?`<button id="upgradeCastle" class="button button-primary">Upgrade to ${next.beds} beds · ${costText(next.price,next.currency)}</button>`:'<div class="maxed">✦ Maximum castle level</div>'}</div>`;
+ if(next)$('#upgradeCastle').onclick=()=>{
+  if(!spend(next.price,next.currency)){uiToast('Not enough '+next.currency+' for this Castle upgrade.');return;}
+  state.castles[id]++;persist();renderAll();uiToast(`Castle upgraded! You have ${next.beds} beds now.`);
+ };
+ const mine=state.mines[id],count=mineCount(id);
+ $('#minePanel').innerHTML=`<div class="structure-crest">💎</div><div class="structure-copy"><h3>Diamond Mine</h3>
+ ${mine?`<p>${count} / 3 diamonds ready · 1 every 8 minutes</p><button id="mineAction" class="button button-ghost" ${count?'':'disabled'}>Collect ${count} 💎</button>`:
+ `<p>Build a mine here to earn 1 diamond every 8 minutes (holds 3).</p><button id="mineAction" class="button button-ghost">Build mine · 500 ◈</button>`}</div>`;
+ $('#mineAction').onclick=()=>{
+  if(!state.mines[id]){
+   if(!spend(500,'coins')){uiToast('Need 500 coins for a Diamond Mine.');return;}
+   state.mines[id]={lastCollected:now()};persist();renderAll();uiToast(`Diamond Mine built on ${is.name}!`);return;
+  }
+  const amount=mineCount(id);if(!amount)return;
+  state.diamonds+=amount;state.mines[id].lastCollected=now();persist();renderAll();uiToast(`Collected ${amount} 💎!`);
+ };
+ const coinsReady=Math.floor(unclaimedCoins(id)),perMinute=coinRate(id);
+ $('#coinPanel').innerHTML=`<div class="structure-crest">🪙</div><div class="structure-copy"><h3>Monster Earnings</h3><p>${format(coinsReady)} coins waiting · ${format(perMinute)}/minute · up to 2 hours offline</p><button id="collectCoins" class="button button-ghost" ${coinsReady?'':'disabled'}>Collect ${format(coinsReady)} ◈</button></div>`;
+ $('#collectCoins').onclick=collectCoins;
+ const canClaim=now()-(state.dailyLast||0)>=DAILY_INTERVAL;
+ $('#dailyClaim').disabled=!canClaim;
+ $('#dailyClaim').textContent=canClaim?'Claim 3 💎':'Gift claimed ✓';
+}
+function dailyClaim(){if(now()-(state.dailyLast||0)<DAILY_INTERVAL){uiToast('The daily gift is already claimed.');return;}
+ state.dailyLast=now();state.diamonds+=3;persist();renderAll();uiToast('Daily reward: +3 diamonds!');
+}
+function renderShop(){const is=byIsland(state.island);const all=SPECIES.filter(s=>s.cls==='Normal'&&s.els.length===1&&allowed(s.id,is.id));
+ $('#shopGrid').innerHTML=all.map(s=>`<div class="monster-card">${creatureArt(s.id)}<strong>${s.name}</strong><div class="card-tags">${elmChips(s.els)}</div><p>${s.desc}</p>
+ <button class="button button-primary" data-buy="${s.id}">Buy for ${PRICE_SINGLE} ◈</button></div>`).join('');
+ $('#shopGrid').querySelectorAll('[data-buy]').forEach(b=>b.onclick=()=>buySingle(b.dataset.buy));
+}
+function buySingle(id){if(!allowed(id,state.island)||SPECIES_BY_ID[id].els.length!==1)return;
+ if(!spend(PRICE_SINGLE,'coins')){uiToast(`Need ${costText(PRICE_SINGLE,'coins')} to purchase this monster.`);return;}
+ const v={uid:newId(),id,rarity:'Common'};state.inventory.push(v);discover(v);
+ let placed=false;if(canPlace(v,state.island)){accrueIncome(state.island);state.stages[state.island].push(v.uid);stagePage=Math.floor((state.stages[state.island].length-1)/STAGE_PAGE_SIZE);placed=true;}
+ persist();renderAll();uiToast(`${SPECIES_BY_ID[id].name} bought ${placed?'and placed on the island!':'and sent to storage (not enough Beds)!'}`);
+}
+function canPlace(mon,id){return state.purchased.includes(id)&&allowed(mon.id,id)&&!isPlaced(mon.uid)&&
+ state.stages[id].length<MAX_PLACED_MONSTERS&&bedsUsed(id)+bedCost(mon)<=bedCapacity(id);}
+function viewSpecies(s,rarity){const type=s.els.length?`${['','Single','Double','Triple','Quad','Quint'][s.els.length]}-element`:'Special class';
+ const parentNames=s.parents?s.parents.map(id=>SPECIES_BY_ID[id].name):[];
+ const recipe=s.cls!=='Normal'?`<strong>${s.cls} recipe</strong>${parentNames[0]} + ${parentNames[1]}`:s.els.length===1?
+ `<strong>Single-element recipe</strong>Buy Common ${s.name} in a shop where its element is available. Breed two different Triple monsters sharing only ${ELEMENTS[s.els[0]].name} for Rare or Epic.`:
+ `<strong>Normal breeding</strong>Combine two non-overlapping Normal parents whose elements sum to ${s.els.map(id=>ELEMENTS[id].name).join(' + ')}.`;
+ showModal(`${rarity} ${s.name}`,`${s.cls} · ${type}`,`<div class="detail-card">${creatureArt(s.id,rarity).replace('class="monster-art','class="detail-art monster-art')}
+ <p>${s.desc}</p><div class="card-tags">${elmChips(s.els)}</div><div class="rarity-ribbon">${RARITIES.map(r=>`<span class="${has(s.id,r)?'owned':''}" style="${!has(s.id,r)?`color:${rarityColor(r)}`:''}">${r} ${has(s.id,r)?'✓':'?'}</span>`).join('')}</div>
+ <div class="formula">${recipe}<div style="margin-top:8px;color:#b6c9bf">Uses ${s.cls==='Normal'?s.els.length:bedCost({id:s.id})} Castle Beds. ${rarity==='Epic'?'Epics cannot breed.':'Common and Rares can breed.'}</div></div>
+ <div class="detail-actions"><button class="button button-primary" id="goBreed">Breeding Grove</button>${s.els.length===1?'<button class="button" id="goShop">Creature Shop</button>':''}</div></div>`);
+ $('#goBreed').onclick=()=>{closeModal();switchView('breed');};if($('#goShop'))$('#goShop').onclick=()=>{closeModal();switchView('shop');};
+}
+function renderBook(){const query=$('#bookSearch').value.trim().toLowerCase(),cl=$('#classFilter').value,rar=$('#rarityFilter').value;
+ const entries=SPECIES.filter(s=>cl==='all'||s.cls===cl).flatMap(s=>RARITIES.filter(r=>rar==='all'||rar===r).map(r=>({s,r})))
+ .filter(({s,r})=>[s.name,s.cls,r,...s.els.map(e=>ELEMENTS[e].name)].join(' ').toLowerCase().includes(query));
+ $('#bookGrid').innerHTML=entries.length?entries.map(({s,r})=>`<button class="book-item ${has(s.id,r)?'':'undiscovered'}" data-id="${s.id}" data-rarity="${r}">
+ ${creatureArt(s.id,r)}<div class="book-name">${s.name}</div><div class="book-sub">${s.cls} · ${s.els.length?`${s.els.length} elements`:'Special'}</div>
+ <span class="rarity-tag" style="color:${rarityColor(r)}">${r} ${has(s.id,r)?'✓ discovered':'◌ undiscovered'}</span></button>`).join(''):'<div class="empty-message">No monsters match that search.</div>';
+ $('#bookGrid').querySelectorAll('[data-id]').forEach(b=>b.onclick=()=>viewSpecies(SPECIES_BY_ID[b.dataset.id],b.dataset.rarity));
+}
+function showModal(title,subtitle,html){$('#modalTitle').textContent=title;$('#modalSubtitle').textContent=subtitle;
+ $('#modalBody').innerHTML=html;$('#modal').hidden=false;document.body.style.overflow='hidden';}
+function closeModal(){ownerAuthenticated=false;$('#modal').hidden=true;document.body.style.overflow='';}
+function picker(options,title,subtitle,callback){if(!options.length){uiToast('No eligible monsters here. Check your storage or island.');return;}
+ showModal(title,subtitle,`<div class="picker-list">${options.map(v=>{const s=SPECIES_BY_ID[v.id];return `<button class="picker-item" data-item="${v.uid}">${creatureArt(v.id,v.rarity)}<strong>${s.name}</strong><small>${v.rarity} · ${bedCost(v)} Beds</small></button>`;}).join('')}</div>`);
+ $('#modalBody').querySelectorAll('[data-item]').forEach(b=>b.onclick=()=>{const v=item(b.dataset.item);closeModal();callback(v);});
+}
+function openStagePicker(){if(demoOn){uiToast('Exit preview mode before placing monsters.');return;}
+ if(state.stages[state.island].length>=MAX_PLACED_MONSTERS){uiToast('This island reached its maximum monster population.');return;}
+ const stored=state.inventory.filter(v=>!isPlaced(v.uid)&&allowed(v.id,state.island));
+ const eligible=stored.filter(v=>canPlace(v,state.island));
+ if(!eligible.length){uiToast(stored.length?'Upgrade your Castle for more Beds.':'No available monsters in storage; buy or breed some first.');return;}
+ picker(eligible,'Place a monster',`Beds available: ${bedCapacity(state.island)-bedsUsed(state.island)}. Each instance can live on only one island.`,v=>{
+  if(!v||!canPlace(v,state.island)){uiToast('This monster cannot be placed here.');return;}
+  accrueIncome(state.island);state.stages[state.island].push(v.uid);stagePage=Math.floor((state.stages[state.island].length-1)/STAGE_PAGE_SIZE);persist();renderAll();uiToast(`${SPECIES_BY_ID[v.id].name} is now singing!`);
+ });
+}
+function openParentPicker(index){const other=selectedParents[1-index];
+ const placed=state.stages[state.island].map(uid=>item(uid)).filter(v=>v&&v.rarity!=='Epic'&&(!other||v.uid!==other));
+ picker(placed,`Choose parent ${index===0?'A':'B'}`,'Parents must be physically on this island. Common and Rare forms can breed.',v=>{
+  selectedParents[index]=v?.uid||null;renderBreed();
+ });
+}
+function combination(a,b){if(!a||!b||a.uid===b.uid)return null;
+ const s1=SPECIES_BY_ID[a.id],s2=SPECIES_BY_ID[b.id];if(!s1||!s2||a.rarity==='Epic'||b.rarity==='Epic')return null;
+ const pair=[a.id,b.id].sort().join('|');
+ // Even with overlapping elements, two forms of the same species produce Common.
+ if(a.id===b.id&&new Set([a.rarity,b.rarity]).has('Rare')&&new Set([a.rarity,b.rarity]).has('Common'))
+  return {species:s1,mode:'same',success:1,forceRarity:'Common',note:'Common + Rare of the same species returns a Common.'};
+ const special=SPECIES.find(s=>s.parents&&s.parents.slice().sort().join('|')===pair);
+ if(special)return {species:special,mode:'special',success:{Legendary:.72,Mythical:.60,Ethereal:.48}[special.cls],note:`A ${special.cls} egg may hatch from this special combination!`};
+ if(s1.cls==='Normal'&&s2.cls==='Normal'){
+  const shared=s1.els.filter(e=>s2.els.includes(e));
+  if(s1.els.length===3&&s2.els.length===3&&shared.length===1){const target=SPECIES.find(s=>s.cls==='Normal'&&s.els.length===1&&s.els[0]===shared[0]);
+   if(target)return {species:target,mode:'singleRare',success:.78,note:`Two Triples sharing only ${ELEMENTS[shared[0]].name} can produce a Rare or Epic single.`};}
+  if(!shared.length){const els=[...new Set([...s1.els,...s2.els])].sort();
+   const target=SPECIES.find(s=>s.cls==='Normal'&&s.els.length===els.length&&s.els.slice().sort().join('|')===els.join('|'));
+   if(target&&els.length>=2)return {species:target,mode:'normal',success:{2:1,3:.86,4:.74,5:.62}[els.length],note:`${s1.els.length} + ${s2.els.length} elements can produce ${target.name}.`};
+   return {species:null,note:'No monster in the roster currently uses that exact combination.'};
+  }
+  return {species:null,note:'These parents share an element. Try a different combination or a known special recipe.'};
+ }
+ return {species:null,note:'Special classes require their exact two-monster recipes. Check the Monster Book.'};
+}
+function breedingDuration(s,rarity){let base=s.cls==='Legendary'?110:s.cls==='Mythical'?155:s.cls==='Ethereal'?205:Math.max(20,s.els.length*24);
+ if(rarity==='Rare')base=Math.ceil(base*1.3);if(rarity==='Epic')base=Math.ceil(base*1.7);
+ return base*1000; // Fast prototype timers in real seconds, rather than MSM's hours.
+}
+function timeLeft(ms){const seconds=Math.max(0,Math.ceil(ms/1000));return seconds>=60?`${Math.floor(seconds/60)}m ${String(seconds%60).padStart(2,'0')}s`:`${seconds}s`;}
+function renderNursery(){const egg=state.eggs[state.island],panel=$('#nurseryPanel');
+ if(!egg){panel.innerHTML='<div class="nursery-title">🥚 Nursery</div><p>Your Nursery is empty. Breed two monsters to create an egg.</p>';return;}
+ const remaining=Math.max(0,egg.readyAt-now()),rush=Math.max(1,Math.ceil(remaining/60000));
+ panel.innerHTML=`<div class="nursery-title">🥚 Nursery · ${remaining?'Incubating':'Ready!'}</div>
+ <div class="egg-row"><div class="egg-icon ${remaining?'wobbling':''}">🥚</div><div><strong>${remaining?'Mysterious monster egg':`${egg.rarity} ${SPECIES_BY_ID[egg.id].name}`}</strong>
+ <p>${remaining?`Ready in ${timeLeft(remaining)}`:'Your monster is ready to hatch!'}</p></div></div>
+ ${remaining?`<button id="rushEgg" class="button button-ghost">Finish now · ${rush} 💎</button>`:'<button id="hatchEgg" class="button button-primary">Hatch egg ✨</button>'}`;
+ if(remaining)$('#rushEgg').onclick=()=>{
+  const current=state.eggs[state.island];if(!current)return;
+  const price=Math.max(1,Math.ceil(Math.max(0,current.readyAt-now())/60000));
+  if(!spend(price,'diamonds')){uiToast(`Need ${price} diamonds to finish incubation.`);return;}
+  current.readyAt=now();persist();renderAll();uiToast('Incubation finished instantly!');
+ };else $('#hatchEgg').onclick=hatchEgg;
+}
+function renderBreed(){for(let n=0;n<2;n++){
+ const v=item(selectedParents[n]),el=n===0?$('#parentA'):$('#parentB');
+ if(!v||!state.stages[state.island].includes(v.uid)){
+  selectedParents[n]=null;el.innerHTML='<span class="plus">+</span><span>Choose parent</span>';continue;
+ }
+ const s=SPECIES_BY_ID[v.id];el.innerHTML=`${creatureArt(v.id,v.rarity)}<strong>${s.name}</strong><small>${v.rarity} · ${s.cls}</small>`;
+ }
+ const a=item(selectedParents[0]),b=item(selectedParents[1]),comb=combination(a,b),busy=!!state.eggs[state.island];
+ $('#prediction').innerHTML=comb?(comb.species?`<strong>Possible egg: ${comb.species.name} (${comb.species.cls})</strong><br>${comb.note}<br>Chance of that species: ${Math.round(comb.success*100)}% before bloom.`:`<strong>No egg from this pairing.</strong><br>${comb.note}`):'Select two different Common or Rare parents placed on this island.';
+ $('#breedBtn').disabled=busy||!comb||!comb.species||state.coins<BREED_PRICE||($('#diamondBoost').checked&&state.diamonds<BLOOM_PRICE);
+ $('#breedBtn').textContent=busy?'Nursery occupied':`Breed monsters · ${BREED_PRICE} ◈`;
+ $('#elementLegend').innerHTML=elmChips(byIsland(state.island).els);
+ renderNursery();
+}
+function breed(){const a=item(selectedParents[0]),b=item(selectedParents[1]);
+ if(!a||!b||!state.stages[state.island].includes(a.uid)||!state.stages[state.island].includes(b.uid)){uiToast('Place both parents on this island first.');return;}
+ const combo=combination(a,b);if(!combo||!combo.species){uiToast('Choose a valid breeding combination.');return;}
+ if(state.eggs[state.island]){uiToast('Finish the current egg before breeding again.');return;}
+ const boost=$('#diamondBoost').checked;if(boost&&state.diamonds<BLOOM_PRICE){uiToast('Not enough diamonds for bloom.');return;}
+ if(state.coins<BREED_PRICE){uiToast('You need 40 coins.');return;}
+ state.coins-=BREED_PRICE;if(boost)state.diamonds-=BLOOM_PRICE;state.breeds++;
+ const win=Math.random()<Math.min(1,combo.success*(boost?1.2:1));
+ const species=win?combo.species:SPECIES_BY_ID[Math.random()<.5?a.id:b.id];
+ let rarity='Common';
+ if(win&&combo.mode==='singleRare')rarity=Math.random()<(boost?.19:.07)?'Epic':'Rare';
+ else if(win&&!combo.forceRarity){const roll=Math.random();rarity=roll<(boost?.14:.045)?'Epic':roll<(boost?.46:.25)?'Rare':'Common';}
+ if(combo.forceRarity)rarity=combo.forceRarity;
+ state.eggs[state.island]={id:species.id,rarity,readyAt:now()+breedingDuration(species,rarity),failed:!win,wasNew:!has(species.id,rarity)};
+ $('#diamondBoost').checked=false;persist();renderAll();uiToast('An egg is incubating in the Nursery! 🥚');
+}
+function hatchEgg(){const egg=state.eggs[state.island];if(!egg)return;
+ if(egg.readyAt>now()){uiToast('This egg has not finished incubating.');return;}
+ const mon={uid:newId(),id:egg.id,rarity:egg.rarity};
+ state.inventory.push(mon);const newDiscovery=!has(mon.id,mon.rarity);discover(mon);
+ delete state.eggs[state.island];
+ let placed=false;if(canPlace(mon,state.island)){accrueIncome(state.island);state.stages[state.island].push(mon.uid);stagePage=Math.floor((state.stages[state.island].length-1)/STAGE_PAGE_SIZE);placed=true;}
+ persist();renderAll();switchView('island',false);
+ showModal(`Hatched: ${egg.rarity} ${SPECIES_BY_ID[egg.id].name}!`,newDiscovery?'✦ NEW MONSTER BOOK DISCOVERY!':'A new voice for your collection.',
+ `<div class="hatch-result">${creatureArt(mon.id,mon.rarity)}<p>${SPECIES_BY_ID[egg.id].desc}</p><strong>${placed?'Placed automatically on your island.':'Sent to storage — upgrade your Castle or free up Beds to place it.'}</strong>
+ <button class="button button-primary" id="hatchDone">Wonderful!</button></div>`);
+ $('#hatchDone').onclick=closeModal;
+}
+function openOwner(){ownerAuthenticated=false;
+ showModal('Owner panel','Enter the owner code to unlock local creator tools. No username is required.',
+ `<form id="ownerLogin" class="owner-login"><label for="ownerCode">Owner access code</label><input id="ownerCode" type="password" autocomplete="off" required placeholder="Enter code" aria-label="Owner code"/>
+ <button type="submit" class="button button-primary">Unlock owner tools</button><p class="fineprint">This code only protects the local game's panel. It is visible in the downloadable source and is not secure online authentication.</p></form>`);
+ $('#ownerLogin').onsubmit=e=>{e.preventDefault();
+  if($('#ownerCode').value==='BUG*'){ownerAuthenticated=true;renderOwnerTools();}
+  else{uiToast('Incorrect owner code.');$('#ownerCode').value='';$('#ownerCode').focus();}
+ };
+ $('#ownerCode').focus();
+}
+function renderOwnerTools(){if(!ownerAuthenticated)return;
+ $('#modalTitle').textContent='⚙ CHORUSWILD Creator Tools';
+ $('#modalSubtitle').textContent='Local save editor · Owner access granted for this panel session.';
+ const speciesOpts=SPECIES.map(s=>`<option value="${s.id}">${s.name} (${s.cls})</option>`).join('');
+ $('#modalBody').innerHTML=`<div class="owner-tools">
+ <div class="owner-row"><button class="button button-primary" id="ownerCoins">+ 10,000 coins</button><button class="button button-primary" id="ownerDiamonds">+ 100 diamonds</button></div>
+ <div class="owner-row"><button class="button button-ghost" id="ownerIslands">Unlock all islands</button><button class="button button-ghost" id="ownerCastle">Max current Castle</button></div>
+ <div class="owner-gift"><label for="ownerSpecies">Grant a monster</label><div class="owner-row"><select id="ownerSpecies">${speciesOpts}</select><select id="ownerRarity"><option>Common</option><option>Rare</option><option>Epic</option></select></div><button id="ownerGrant" class="button button-primary">Add to storage</button></div>
+ <p class="fineprint">Owner items are stored in this browser only. This is a prototype cheat/debug panel, not a server-admin system.</p>
+ </div>`;
+ const action=fn=>()=>{if(!ownerAuthenticated)return;fn();persist();renderAll();renderOwnerTools();};
+ $('#ownerCoins').onclick=action(()=>{state.coins+=10000;uiToast('Owner: +10,000 coins.');});
+ $('#ownerDiamonds').onclick=action(()=>{state.diamonds+=100;uiToast('Owner: +100 diamonds.');});
+ $('#ownerIslands').onclick=action(()=>{state.purchased=ISLANDS.map(is=>is.id);uiToast('All islands unlocked!');});
+ $('#ownerCastle').onclick=action(()=>{state.castles[state.island]=CASTLE_LEVELS.length-1;uiToast('Current Castle maxed!');});
+ $('#ownerGrant').onclick=()=>{if(!ownerAuthenticated)return;
+  const id=$('#ownerSpecies').value,rarity=$('#ownerRarity').value;if(!SPECIES_BY_ID[id]||!RARITIES.includes(rarity))return;
+  const mon={uid:newId(),id,rarity};state.inventory.push(mon);discover(mon);persist();renderAll();renderOwnerTools();uiToast(`Owner granted ${rarity} ${SPECIES_BY_ID[id].name}.`);
+ };
+}
+function renderAll(){renderWallet();renderIslands();renderNav();renderStage();renderIslandEconomy();
+ if(state.view==='shop')renderShop();if(state.view==='book')renderBook();if(state.view==='breed')renderBreed();
+ $('#audioToggle').textContent=engine.running?'■ Stop song':'▶ Play song';
+}
+function init(){
+ $$('.navitem[data-view]').forEach(b=>b.onclick=()=>switchView(b.dataset.view));
+ $('#ownerOpen').onclick=openOwner;
+ $('#audioToggle').onclick=async()=>{if(engine.running){engine.stop();renderAll();return;}try{await engine.start();renderAll();}catch(e){uiToast('Audio needs Chrome, Safari or Firefox with sound enabled.');console.warn(e);}};
+ $('#addToStage').onclick=openStagePicker;$('#dailyClaim').onclick=dailyClaim;
+ $('#demoToggle').onclick=()=>{demoOn=!demoOn;engine.setIsland(byIsland(state.island));renderAll();uiToast(demoOn?'Preview choir: no coins or diamonds earned.':'Back to your real island song.');};
+ $('#parentA').onclick=()=>openParentPicker(0);$('#parentB').onclick=()=>openParentPicker(1);
+ $('#breedBtn').onclick=breed;$('#diamondBoost').onchange=renderBreed;
+ $('#bookSearch').oninput=renderBook;$('#classFilter').onchange=renderBook;$('#rarityFilter').onchange=renderBook;
+ $$('[data-close]').forEach(el=>el.onclick=closeModal);
+ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('#modal').hidden)closeModal();});
+ document.addEventListener('visibilitychange',()=>{if(document.hidden&&engine.running){engine.stop();renderAll();}});
+ // Update nursery countdown + ready diamond mine counters while the page is open.
+ setInterval(()=>{if(state.view==='breed')renderNursery();if(state.view==='island')renderIslandEconomy();},3000);
+ persist();renderAll();
+}
+init();
+// Non-privileged read/test hooks. Owner actions remain behind the UI code prompt.
+window.__choruswild={getState:()=>structuredClone(state),getRoster:()=>SPECIES,combination,stop:()=>engine.stop(),
+ getBeds:()=>({used:bedsUsed(state.island),capacity:bedCapacity(state.island)}),getIsland:()=>state.island};
+})();
+
+</script>
+</body></html>
